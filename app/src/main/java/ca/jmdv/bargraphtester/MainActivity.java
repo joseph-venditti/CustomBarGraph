@@ -1,6 +1,7 @@
 package ca.jmdv.bargraphtester;
 
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 
 import ca.jmdv.bargraphtester.views.CustomBarGraph;
@@ -14,7 +15,6 @@ public class MainActivity extends AppCompatActivity {
         
         setContentView(R.layout.activity_main);
 
-        // TODO: Set colors dynamically
         // TODO: Pass an array of color/value pairs
 
         final CustomBarGraph barGraph1 = (CustomBarGraph) findViewById(R.id.barGraph1);
@@ -24,6 +24,11 @@ public class MainActivity extends AppCompatActivity {
         barGraph1.setValue3(1.0f);
         barGraph1.setValue4(1.0f);
         barGraph1.setValue5(1.0f);
+        barGraph1.setColor1(ContextCompat.getColor(this, R.color.colorBlue_200));
+        barGraph1.setColor2(ContextCompat.getColor(this, R.color.colorBlue_300));
+        barGraph1.setColor3(ContextCompat.getColor(this, R.color.colorBlue_400));
+        barGraph1.setColor4(ContextCompat.getColor(this, R.color.colorBlue_500));
+        barGraph1.setColor5(ContextCompat.getColor(this, R.color.colorBlue_600));
 
         final CustomBarGraph barGraph2 = (CustomBarGraph) findViewById(R.id.barGraph2);
         barGraph2.setMaxValue(25.0f);

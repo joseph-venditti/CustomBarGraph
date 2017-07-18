@@ -8,6 +8,7 @@ import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.Rect;
 import android.graphics.RectF;
+import android.support.annotation.ColorInt;
 import android.util.AttributeSet;
 import android.view.View;
 
@@ -52,6 +53,26 @@ public class CustomBarGraph extends View {
         this.maxValue = maxValue;
         invalidate();
         requestLayout();
+    }
+
+    public void setColor1(@ColorInt int color) {
+        fillPaint1.setColor(color);
+    }
+
+    public void setColor2(@ColorInt int color) {
+        fillPaint2.setColor(color);
+    }
+
+    public void setColor3(@ColorInt int color) {
+        fillPaint3.setColor(color);
+    }
+
+    public void setColor4(@ColorInt int color) {
+        fillPaint4.setColor(color);
+    }
+
+    public void setColor5(@ColorInt int color) {
+        fillPaint5.setColor(color);
     }
 
     public void setValue1(float newValue) {
