@@ -25,12 +25,7 @@
             android:paddingTop="@dimen/value_bar_padding_top"
             custom:barHeight="@dimen/value_bar_barHeight"
             custom:baseColor="@color/colorGrey_200"
-            custom:cornerOverlayColor="@color/colorWhite"
-            custom:fillColor1="@color/colorPurple_500"
-            custom:fillColor2="@color/colorPurple_600"
-            custom:fillColor3="@color/colorPurple_700"
-            custom:fillColor4="@color/colorPurple_800"
-            custom:fillColor5="@color/colorPurple_900" />
+            custom:cornerOverlayColor="@color/colorWhite" />
 
         <ca.jmdv.bargraphtester.views.CustomBarGraph
             android:id="@+id/barGraph2"
