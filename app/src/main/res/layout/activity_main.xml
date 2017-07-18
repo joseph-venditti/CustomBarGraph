@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:custom="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorWhite"
+    tools:context="ca.jmdv.bargraphtester.MainActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:orientation="vertical"
+        android:padding="20dp">
+
+        <ca.jmdv.bargraphtester.views.CustomBarGraph
+            android:id="@+id/barGraph1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorWhite"
+            android:paddingBottom="@dimen/value_bar_padding_bottom"
+            android:paddingLeft="@dimen/value_bar_padding_horizontal"
+            android:paddingRight="@dimen/value_bar_padding_horizontal"
+            android:paddingTop="@dimen/value_bar_padding_top"
+            custom:barHeight="@dimen/value_bar_barHeight"
+            custom:baseColor="@color/colorGrey_200"
+            custom:cornerOverlayColor="@color/colorWhite"
+            custom:fillColor1="@color/colorPurple_500"
+            custom:fillColor2="@color/colorPurple_600"
+            custom:fillColor3="@color/colorPurple_700"
+            custom:fillColor4="@color/colorPurple_800"
+            custom:fillColor5="@color/colorPurple_900" />
+
+        <ca.jmdv.bargraphtester.views.CustomBarGraph
+            android:id="@+id/barGraph2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorWhite"
+            android:paddingBottom="@dimen/value_bar_padding_bottom"
+            android:paddingLeft="@dimen/value_bar_padding_horizontal"
+            android:paddingRight="@dimen/value_bar_padding_horizontal"
+            android:paddingTop="@dimen/value_bar_padding_top"
+            custom:barHeight="@dimen/value_bar_barHeight"
+            custom:baseColor="@color/colorGrey_200"
+            custom:cornerOverlayColor="@color/colorWhite"
+            custom:fillColor1="@color/colorOrange_300"
+            custom:fillColor2="@color/colorOrange_500"
+            custom:fillColor3="@color/colorOrange_700" />
+
+        <ca.jmdv.bargraphtester.views.CustomBarGraph
+            android:id="@+id/barGraph3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorWhite"
+            android:paddingBottom="@dimen/value_bar_padding_bottom"
+            android:paddingLeft="@dimen/value_bar_padding_horizontal"
+            android:paddingRight="@dimen/value_bar_padding_horizontal"
+            android:paddingTop="@dimen/value_bar_padding_top"
+            custom:barHeight="@dimen/value_bar_barHeight"
+            custom:baseColor="@color/colorGrey_200"
+            custom:cornerOverlayColor="@color/colorWhite"
+            custom:fillColor1="@color/colorBlue_500"
+            custom:fillColor2="@color/colorBlue_600"
+            custom:fillColor3="@color/colorBlue_700"
+            custom:fillColor4="@color/colorBlue_800" />
+
+        <ca.jmdv.bargraphtester.views.CustomBarGraph
+            android:id="@+id/barGraph4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorWhite"
+            android:paddingBottom="@dimen/value_bar_padding_bottom"
+            android:paddingLeft="@dimen/value_bar_padding_horizontal"
+            android:paddingRight="@dimen/value_bar_padding_horizontal"
+            android:paddingTop="@dimen/value_bar_padding_top"
+            custom:barHeight="@dimen/value_bar_barHeight"
+            custom:baseColor="@color/colorGrey_200"
+            custom:cornerOverlayColor="@color/colorWhite"
+            custom:fillColor1="@color/colorGreen_200"
+            custom:fillColor2="@color/colorGreen_400"
+            custom:fillColor3="@color/colorGreen_600"
+            custom:fillColor4="@color/colorGreen_800" />
+
+    </LinearLayout>
+
+</RelativeLayout>

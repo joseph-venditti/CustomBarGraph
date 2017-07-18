@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+
+    <color name="colorWhite">#FFFFFF</color>
+
+    <color name="colorGrey_100">#F5F5F5</color>
+    <color name="colorGrey_200">#EEEEEE</color>
+    <color name="colorGrey_300">#E0E0E0</color>
+    <color name="colorGrey_400">#BDBDBD</color>
+    <color name="colorGrey_500">#9E9E9E</color>
+
+    <color name="colorPurple_100">#E1BEE7</color>
+    <color name="colorPurple_200">#CE93D8</color>
+    <color name="colorPurple_300">#BA68C8</color>
+    <color name="colorPurple_400">#AB47BC</color>
+    <color name="colorPurple_500">#9C27B0</color>
+    <color name="colorPurple_600">#8E24AA</color>
+    <color name="colorPurple_700">#7B1FA2</color>
+    <color name="colorPurple_800">#6A1B9A</color>
+    <color name="colorPurple_900">#4A148C</color>
+
+    <color name="colorBlue_100">#BBDEFB</color>
+    <color name="colorBlue_200">#90CAF9</color>
+    <color name="colorBlue_300">#64B5F6</color>
+    <color name="colorBlue_400">#42A5F5</color>
+    <color name="colorBlue_500">#2196F3</color>
+    <color name="colorBlue_600">#1E88E5</color>
+    <color name="colorBlue_700">#1976D2</color>
+    <color name="colorBlue_800">#1565C0</color>
+    <color name="colorBlue_900">#0D47A1</color>
+
+    <color name="colorGreen_100">#C8E6C9</color>
+    <color name="colorGreen_200">#A5D6A7</color>
+    <color name="colorGreen_300">#81C784</color>
+    <color name="colorGreen_400">#66BB6A</color>
+    <color name="colorGreen_500">#4CAF50</color>
+    <color name="colorGreen_600">#43A047</color>
+    <color name="colorGreen_700">#388E3C</color>
+    <color name="colorGreen_800">#2E7D32</color>
+    <color name="colorGreen_900">#1B5E20</color>
+
+    <color name="colorOrange_100">#FFE0B2</color>
+    <color name="colorOrange_200">#FFCC80</color>
+    <color name="colorOrange_300">#FFB74D</color>
+    <color name="colorOrange_400">#FFA726</color>
+    <color name="colorOrange_500">#FF9800</color>
+    <color name="colorOrange_600">#FB8C00</color>
+    <color name="colorOrange_700">#F57C00</color>
+    <color name="colorOrange_800">#EF6C00</color>
+    <color name="colorOrange_900">#E65100</color>
+
+</resources>
