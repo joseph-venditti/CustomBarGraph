@@ -4,6 +4,9 @@ import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 
+import java.util.ArrayList;
+
+import ca.jmdv.bargraphtester.models.ColorValuePair;
 import ca.jmdv.bargraphtester.views.CustomBarGraph;
 
 public class MainActivity extends AppCompatActivity {
@@ -12,42 +15,37 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        
+
         setContentView(R.layout.activity_main);
 
-        // TODO: Pass an array of color/value pairs
+        // Create color/value pairs
+        ColorValuePair pair0 = new ColorValuePair(ContextCompat.getColor(this, R.color.colorOrange_800), 4.0f);
+        ColorValuePair pair1 = new ColorValuePair(ContextCompat.getColor(this, R.color.colorBlue_200), 0.1f);
+        ColorValuePair pair2 = new ColorValuePair(ContextCompat.getColor(this, R.color.colorBlue_300), 0.2f);
+        ColorValuePair pair3 = new ColorValuePair(ContextCompat.getColor(this, R.color.colorBlue_400), 0.5f);
+        ColorValuePair pair4 = new ColorValuePair(ContextCompat.getColor(this, R.color.colorGreen_200), 0.9f);
+        ColorValuePair pair5 = new ColorValuePair(ContextCompat.getColor(this, R.color.colorBlue_600), 1.6f);
+        ColorValuePair pair6 = new ColorValuePair(ContextCompat.getColor(this, R.color.colorPurple_500), 3.2f);
+        ColorValuePair pair7 = new ColorValuePair(ContextCompat.getColor(this, R.color.colorOrange_500), 2.2f);
+        ColorValuePair pair8 = new ColorValuePair(ContextCompat.getColor(this, R.color.colorGreen_700), 5.7f);
+        ColorValuePair pair9 = new ColorValuePair(ContextCompat.getColor(this, R.color.colorGreen_800), 2.5f);
 
+        // Add pairs to array
+        ArrayList<ColorValuePair> values = new ArrayList<>();
+        values.add(pair0);
+        values.add(pair1);
+        values.add(pair2);
+        values.add(pair3);
+        values.add(pair4);
+        values.add(pair5);
+        values.add(pair6);
+        values.add(pair7);
+        values.add(pair8);
+        values.add(pair9);
+
+        // Set max value and data for bar graph
         final CustomBarGraph barGraph1 = (CustomBarGraph) findViewById(R.id.barGraph1);
-        barGraph1.setMaxValue(5.0f);
-        barGraph1.setValue1(1.0f);
-        barGraph1.setValue2(1.0f);
-        barGraph1.setValue3(1.0f);
-        barGraph1.setValue4(1.0f);
-        barGraph1.setValue5(1.0f);
-        barGraph1.setColor1(ContextCompat.getColor(this, R.color.colorBlue_200));
-        barGraph1.setColor2(ContextCompat.getColor(this, R.color.colorBlue_300));
-        barGraph1.setColor3(ContextCompat.getColor(this, R.color.colorBlue_400));
-        barGraph1.setColor4(ContextCompat.getColor(this, R.color.colorBlue_500));
-        barGraph1.setColor5(ContextCompat.getColor(this, R.color.colorBlue_600));
-
-        final CustomBarGraph barGraph2 = (CustomBarGraph) findViewById(R.id.barGraph2);
-        barGraph2.setMaxValue(25.0f);
-        barGraph2.setValue1(10.0f);
-        barGraph2.setValue2(6.0f);
-        barGraph2.setValue3(2.0f);
-
-        final CustomBarGraph barGraph3 = (CustomBarGraph) findViewById(R.id.barGraph3);
-        barGraph3.setMaxValue(4.0f);
-        barGraph3.setValue1(1.0f);
-        barGraph3.setValue2(1.0f);
-        barGraph3.setValue3(0.19f);
-        barGraph3.setValue4(0.1f);
-
-        final CustomBarGraph barGraph4 = (CustomBarGraph) findViewById(R.id.barGraph4);
-        barGraph4.setMaxValue(5.0f);
-        barGraph4.setValue1(2.0f);
-        barGraph4.setValue2(1.0f);
-        barGraph4.setValue4(0.5f);
-        barGraph4.setValue5(0.1f);
+        barGraph1.setMaxValue(25.0f);
+        barGraph1.setData(values);
     }
 }
