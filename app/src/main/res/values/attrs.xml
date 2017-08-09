@@ -25,5 +25,11 @@
         <!-- How often the scale marker should repeat (value between 1-100) -->
         <attr name="scaleMarkerRepeatPercentage" format="integer" />
 
+        <!-- If you should hide the start line -->
+        <attr name="scaleMarkerHideStartLine" format="boolean" />
+
+        <!-- If you should hide the end line -->
+        <attr name="scaleMarkerHideEndLine" format="boolean" />
+
     </declare-styleable>
 </resources>

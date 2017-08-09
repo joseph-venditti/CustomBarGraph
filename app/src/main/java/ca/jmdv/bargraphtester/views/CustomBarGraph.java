@@ -17,10 +17,9 @@ import ca.jmdv.bargraphtester.models.ColorValuePair;
 
 public class CustomBarGraph extends View {
 
-    // TODO 1: Control scale start end markers
-    // TODO 2: Add marker labels
-    // TODO 3: Add ability for primary labels
-    // TODO 4: Add ability for secondary labels
+    // TODO 1: Add marker labels
+    // TODO 2: Add ability for primary labels
+    // TODO 3: Add ability for secondary labels
 
     private static final String TAG = CustomBarGraph.class.getSimpleName();
 
@@ -39,6 +38,9 @@ public class CustomBarGraph extends View {
     private Paint barBasePaint;
     private Paint scaleMarkerPaint;
     private Paint cornerOverlayPaint;
+    private Paint transparentPaint;
+    private boolean scaleMarkerHideStartLine;
+    private boolean scaleMarkerHideEndLine;
 
     ArrayList<ColorValuePair> rawData;
     ArrayList<Paint> readyColors;
@@ -99,6 +101,10 @@ public class CustomBarGraph extends View {
         // Integers
         scaleMarkerRepeatPercentage = ta.getInteger(R.styleable.CustomBarGraph_scaleMarkerRepeatPercentage, DEFAULT_SCALE_MARKER_REPEAT_PERCENTAGE);
 
+        // Booleans
+        scaleMarkerHideStartLine = ta.getBoolean(R.styleable.CustomBarGraph_scaleMarkerHideStartLine, true);
+        scaleMarkerHideEndLine = ta.getBoolean(R.styleable.CustomBarGraph_scaleMarkerHideEndLine, true);
+
         int baseColor = ta.getColor(R.styleable.CustomBarGraph_baseColor, Color.BLACK);
         int scaleMarkerColor = ta.getColor(R.styleable.CustomBarGraph_scaleMarkerColor, Color.BLACK);
         int cornerOverlayColor = ta.getColor(R.styleable.CustomBarGraph_cornerOverlayColor, Color.TRANSPARENT);
@@ -113,6 +119,9 @@ public class CustomBarGraph extends View {
 
         cornerOverlayPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         cornerOverlayPaint.setColor(cornerOverlayColor);
+
+        transparentPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+        transparentPaint.setColor(Color.TRANSPARENT);
     }
 
     private int measureHeight(int measureSpec) {
@@ -182,7 +191,11 @@ public class CustomBarGraph extends View {
             left = getPaddingLeft() + (i * scaleMarkerWidth) + (i * markerSpace);
             right = left + scaleMarkerWidth;
             fillRect = new RectF(left, top, right, bottom);
-            canvas.drawRect(fillRect, scaleMarkerPaint);
+            if ((scaleMarkerHideStartLine && i == 0) || (scaleMarkerHideEndLine && i == markerCount - 1)) {
+                canvas.drawRect(fillRect, transparentPaint);
+            } else {
+                canvas.drawRect(fillRect, scaleMarkerPaint);
+            }
         }
     }
 

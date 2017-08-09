@@ -6,11 +6,11 @@
     <dimen name="paddingBottom">12dp</dimen>
     <dimen name="paddingHorizontal">24dp</dimen>
     <dimen name="barHeight">24dp</dimen>
-    <dimen name="scaleMarkerHeight">10dp</dimen>
+    <dimen name="scaleMarkerHeight">15dp</dimen>
     <dimen name="scaleMarkerWidth">2dp</dimen>
     <dimen name="scaleMarkerTopPadding">5dp</dimen>
 
     <!-- Integers -->
-    <integer name="scaleMarkerRepeatPercentage">25</integer>
+    <integer name="scaleMarkerRepeatPercentage">33</integer>
 
 </resources>
