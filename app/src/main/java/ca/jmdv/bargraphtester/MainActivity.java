@@ -19,16 +19,11 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         // Create color/value pairs
-        ColorValuePair pair0 = new ColorValuePair(ContextCompat.getColor(this, R.color.colorOrange_800), 4.0f);
-        ColorValuePair pair1 = new ColorValuePair(ContextCompat.getColor(this, R.color.colorBlue_200), 0.1f);
-        ColorValuePair pair2 = new ColorValuePair(ContextCompat.getColor(this, R.color.colorBlue_300), 0.2f);
-        ColorValuePair pair3 = new ColorValuePair(ContextCompat.getColor(this, R.color.colorBlue_400), 0.5f);
-        ColorValuePair pair4 = new ColorValuePair(ContextCompat.getColor(this, R.color.colorGreen_200), 0.9f);
-        ColorValuePair pair5 = new ColorValuePair(ContextCompat.getColor(this, R.color.colorBlue_600), 1.6f);
-        ColorValuePair pair6 = new ColorValuePair(ContextCompat.getColor(this, R.color.colorPurple_500), 3.2f);
-        ColorValuePair pair7 = new ColorValuePair(ContextCompat.getColor(this, R.color.colorOrange_500), 2.2f);
-        ColorValuePair pair8 = new ColorValuePair(ContextCompat.getColor(this, R.color.colorGreen_700), 5.7f);
-        ColorValuePair pair9 = new ColorValuePair(ContextCompat.getColor(this, R.color.colorGreen_800), 2.5f);
+        ColorValuePair pair0 = new ColorValuePair(ContextCompat.getColor(this, R.color.colorOrange_800), 10.0f);
+        ColorValuePair pair1 = new ColorValuePair(ContextCompat.getColor(this, R.color.colorBlue_200), 5.0f);
+        ColorValuePair pair2 = new ColorValuePair(ContextCompat.getColor(this, R.color.colorBlue_300), 1.0f);
+        ColorValuePair pair3 = new ColorValuePair(ContextCompat.getColor(this, R.color.colorBlue_400), 1.0f);
+        ColorValuePair pair4 = new ColorValuePair(ContextCompat.getColor(this, R.color.colorGreen_200), 3.0f);
 
         // Add pairs to array
         ArrayList<ColorValuePair> values = new ArrayList<>();
@@ -37,15 +32,10 @@ public class MainActivity extends AppCompatActivity {
         values.add(pair2);
         values.add(pair3);
         values.add(pair4);
-        values.add(pair5);
-        values.add(pair6);
-        values.add(pair7);
-        values.add(pair8);
-        values.add(pair9);
 
         // Set max value and data for bar graph
         final CustomBarGraph barGraph1 = (CustomBarGraph) findViewById(R.id.barGraph1);
-        barGraph1.setMaxValue(25.0f);
+        barGraph1.setMaxValue(20.0f);
         barGraph1.setData(values);
     }
 }

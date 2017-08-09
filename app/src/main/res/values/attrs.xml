@@ -1,7 +1,7 @@
 <resources>
     <declare-styleable name="CustomBarGraph">
 
-        <!-- The height or (thickness) of the bar -->
+        <!-- The height of the bar -->
         <attr name="barHeight" format="dimension" />
 
         <!-- Base color of the bar (the portion that is not filled) -->
@@ -9,6 +9,21 @@
 
         <!-- Fill color of the corner overlay -->
         <attr name="cornerOverlayColor" format="color" />
+
+        <!-- Fill color of the scale -->
+        <attr name="scaleMarkerColor" format="color" />
+
+        <!-- The height of each scale marker (if provided) -->
+        <attr name="scaleMarkerHeight" format="dimension" />
+
+        <!-- The width of each scale marker (if provided) -->
+        <attr name="scaleMarkerWidth" format="dimension" />
+
+        <!-- The top padding of each scale marker (if provided) -->
+        <attr name="scaleMarkerTopPadding" format="dimension" />
+
+        <!-- How often the scale marker should repeat (value between 1-100) -->
+        <attr name="scaleMarkerRepeatPercentage" format="integer" />
 
     </declare-styleable>
 </resources>

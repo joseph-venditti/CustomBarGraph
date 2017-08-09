@@ -19,13 +19,18 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/colorWhite"
-            android:paddingBottom="@dimen/value_bar_padding_bottom"
-            android:paddingLeft="@dimen/value_bar_padding_horizontal"
-            android:paddingRight="@dimen/value_bar_padding_horizontal"
-            android:paddingTop="@dimen/value_bar_padding_top"
-            custom:barHeight="@dimen/value_bar_barHeight"
+            android:paddingBottom="@dimen/paddingTop"
+            android:paddingLeft="@dimen/paddingHorizontal"
+            android:paddingRight="@dimen/paddingHorizontal"
+            android:paddingTop="@dimen/paddingTop"
+            custom:barHeight="@dimen/barHeight"
             custom:baseColor="@color/colorGrey_200"
-            custom:cornerOverlayColor="@color/colorWhite" />
+            custom:cornerOverlayColor="@color/colorWhite"
+            custom:scaleMarkerColor="@color/colorGrey_200"
+            custom:scaleMarkerHeight="@dimen/scaleMarkerHeight"
+            custom:scaleMarkerRepeatPercentage="@integer/scaleMarkerRepeatPercentage"
+            custom:scaleMarkerTopPadding="@dimen/scaleMarkerTopPadding"
+            custom:scaleMarkerWidth="@dimen/scaleMarkerWidth" />
 
     </LinearLayout>
 

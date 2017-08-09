@@ -6,7 +6,6 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
-import android.graphics.Rect;
 import android.graphics.RectF;
 import android.util.AttributeSet;
 import android.view.View;
@@ -18,12 +17,27 @@ import ca.jmdv.bargraphtester.models.ColorValuePair;
 
 public class CustomBarGraph extends View {
 
+    // TODO 1: Control scale start end markers
+    // TODO 2: Add marker labels
+    // TODO 3: Add ability for primary labels
+    // TODO 4: Add ability for secondary labels
+
     private static final String TAG = CustomBarGraph.class.getSimpleName();
+
+    private static final int MIN_SCALE_MARKER_REPEAT_PERCENTAGE = 1;
+    private static final int MAX_SCALE_MARKER_REPEAT_PERCENTAGE = 100;
+    private static final int DEFAULT_SCALE_MARKER_REPEAT_PERCENTAGE = 10;
+    private static final int DEFAULT_SCALE_MARKER_WIDTH = 2;
 
     private float maxValue = 100;
     private float currentFillLength = 0;
     private int barHeight;
+    private int scaleMarkerHeight;
+    private int scaleMarkerWidth;
+    private int scaleMarkerRepeatPercentage;
+    private int scaleMarkerTopPadding;
     private Paint barBasePaint;
+    private Paint scaleMarkerPaint;
     private Paint cornerOverlayPaint;
 
     ArrayList<ColorValuePair> rawData;
@@ -75,9 +89,18 @@ public class CustomBarGraph extends View {
         setSaveEnabled(true);
 
         TypedArray ta = context.getTheme().obtainStyledAttributes(attrs, R.styleable.CustomBarGraph, 0, 0);
+
+        // Dimensions
         barHeight = ta.getDimensionPixelSize(R.styleable.CustomBarGraph_barHeight, 0);
+        scaleMarkerHeight = ta.getDimensionPixelSize(R.styleable.CustomBarGraph_scaleMarkerHeight, 0);
+        scaleMarkerWidth = ta.getDimensionPixelSize(R.styleable.CustomBarGraph_scaleMarkerWidth, DEFAULT_SCALE_MARKER_WIDTH);
+        scaleMarkerTopPadding = ta.getDimensionPixelSize(R.styleable.CustomBarGraph_scaleMarkerTopPadding, 0);
+
+        // Integers
+        scaleMarkerRepeatPercentage = ta.getInteger(R.styleable.CustomBarGraph_scaleMarkerRepeatPercentage, DEFAULT_SCALE_MARKER_REPEAT_PERCENTAGE);
 
         int baseColor = ta.getColor(R.styleable.CustomBarGraph_baseColor, Color.BLACK);
+        int scaleMarkerColor = ta.getColor(R.styleable.CustomBarGraph_scaleMarkerColor, Color.BLACK);
         int cornerOverlayColor = ta.getColor(R.styleable.CustomBarGraph_cornerOverlayColor, Color.TRANSPARENT);
 
         ta.recycle();
@@ -85,12 +108,15 @@ public class CustomBarGraph extends View {
         barBasePaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         barBasePaint.setColor(baseColor);
 
+        scaleMarkerPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+        scaleMarkerPaint.setColor(scaleMarkerColor);
+
         cornerOverlayPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         cornerOverlayPaint.setColor(cornerOverlayColor);
     }
 
     private int measureHeight(int measureSpec) {
-        int size = barHeight + getPaddingTop() + getPaddingBottom();
+        int size = barHeight + scaleMarkerTopPadding + scaleMarkerHeight + getPaddingTop() + getPaddingBottom();
         return resolveSizeAndState(size, measureSpec, 0);
     }
 
@@ -111,26 +137,58 @@ public class CustomBarGraph extends View {
             drawBar(canvas, readyColors.get(i), readyValues.get(i));
         }
         drawCornerOverlays(canvas);
+        drawScaleMarkers(canvas);
     }
 
     private void drawBase(Canvas canvas) {
-        Rect maxValueRect = new Rect();
-        float barLength = getWidth() - getPaddingRight() - getPaddingLeft() - maxValueRect.width();
+        float barLength = getWidth() - getPaddingRight() - getPaddingLeft();
         float barCenter = getBarCenter();
         float halfBarHeight = barHeight / 2;
         float top = barCenter - halfBarHeight;
         float bottom = barCenter + halfBarHeight;
         float left = getPaddingLeft();
-        float right = getPaddingLeft() + barLength;
+        float right = left + barLength;
         RectF rect = new RectF(left, top, right, bottom);
         canvas.drawRect(rect, barBasePaint);
     }
 
+    private int boundPercentage(int percentage) {
+        if (percentage < MIN_SCALE_MARKER_REPEAT_PERCENTAGE) {
+            percentage = MIN_SCALE_MARKER_REPEAT_PERCENTAGE;
+        } else if (percentage > MAX_SCALE_MARKER_REPEAT_PERCENTAGE) {
+            percentage = MAX_SCALE_MARKER_REPEAT_PERCENTAGE;
+        }
+        return percentage;
+    }
+
+    private void drawScaleMarkers(Canvas canvas) {
+
+        scaleMarkerRepeatPercentage = boundPercentage(scaleMarkerRepeatPercentage);
+
+        RectF fillRect;
+        float left;
+        float right;
+
+        float barLength = getWidth() - getPaddingRight() - getPaddingLeft();
+        float barCenter = getBarCenter();
+        float halfBarHeight = barHeight / 2;
+        float top = barCenter + halfBarHeight + scaleMarkerTopPadding;
+        float bottom = top + scaleMarkerHeight;
+
+        int markerCount = (100 / scaleMarkerRepeatPercentage) + 1;
+        float markerSpace = (barLength - (markerCount * scaleMarkerWidth)) / (markerCount - 1);
+
+        for (int i = 0; i < markerCount; i++) {
+            left = getPaddingLeft() + (i * scaleMarkerWidth) + (i * markerSpace);
+            right = left + scaleMarkerWidth;
+            fillRect = new RectF(left, top, right, bottom);
+            canvas.drawRect(fillRect, scaleMarkerPaint);
+        }
+    }
+
     private void drawBar(Canvas canvas, Paint fillPaint, float valueToDraw) {
 
-        Rect maxValueRect = new Rect();
-
-        float barLength = getWidth() - getPaddingRight() - getPaddingLeft() - maxValueRect.width();
+        float barLength = getWidth() - getPaddingRight() - getPaddingLeft();
         float barCenter = getBarCenter();
         float halfBarHeight = barHeight / 2;
         float top = barCenter - halfBarHeight;
@@ -153,7 +211,7 @@ public class CustomBarGraph extends View {
         float left = getPaddingLeft();
         float right = getWidth() - getPaddingRight();
         float top = getPaddingTop();
-        float bottom = getPaddingTop() + barHeight;
+        float bottom = top + barHeight;
 
         // top left corner
         path.moveTo(left, barCenter);
@@ -217,7 +275,7 @@ public class CustomBarGraph extends View {
     }
 
     private float getBarCenter() {
-        float barCenter = (getHeight() - getPaddingTop() - getPaddingBottom()) / 2;
+        float barCenter = (getHeight() - scaleMarkerHeight - scaleMarkerTopPadding - getPaddingTop() - getPaddingBottom()) / 2;
         barCenter += getPaddingTop();
         return barCenter;
     }
