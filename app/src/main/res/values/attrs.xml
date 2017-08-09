@@ -22,6 +22,9 @@
         <!-- The top padding of each scale line (if provided) -->
         <attr name="scaleLineTopPadding" format="dimension" />
 
+        <!-- The bottom padding of each scale line (if provided) -->
+        <attr name="scaleLineBottomPadding" format="dimension" />
+
         <!-- How often the scale line should repeat (min 1, max 100) -->
         <attr name="scaleLineRepeatPercentage" format="integer" />
 
@@ -33,6 +36,12 @@
 
         <!-- If you should show line percentages (based off the max value) -->
         <attr name="scaleShowLinePercentages" format="boolean" />
+
+        <!-- The text size of the line percentage labels (if provided) -->
+        <attr name="scaleLinePercentageTextSize" format="dimension" />
+
+        <!-- The text color of the line percentage labels (if provided) -->
+        <attr name="scaleLinePercentageTextColor" format="color" />
 
     </declare-styleable>
 </resources>

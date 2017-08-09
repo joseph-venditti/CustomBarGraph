@@ -6,9 +6,11 @@
     <dimen name="paddingBottom">12dp</dimen>
     <dimen name="paddingHorizontal">24dp</dimen>
     <dimen name="barHeight">24dp</dimen>
-    <dimen name="scaleLineHeight">16dp</dimen>
-    <dimen name="scaleLineWidth">2dp</dimen>
+    <dimen name="scaleLineHeight">10dp</dimen>
+    <dimen name="scaleLineWidth">1dp</dimen>
     <dimen name="scaleLineTopPadding">4dp</dimen>
+    <dimen name="scaleLineBottomPadding">4dp</dimen>
+    <dimen name="scaleLinePercentageTextSize">12dp</dimen>
 
     <!-- Integers -->
     <integer name="scaleLineRepeatPercentage">20</integer>

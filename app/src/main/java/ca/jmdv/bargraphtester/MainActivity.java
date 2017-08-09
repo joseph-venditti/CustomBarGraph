@@ -19,11 +19,11 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         // Create color/value pairs
-        ColorValuePair pair0 = new ColorValuePair(ContextCompat.getColor(this, R.color.colorOrange_800), 10.0f);
-        ColorValuePair pair1 = new ColorValuePair(ContextCompat.getColor(this, R.color.colorBlue_200), 5.0f);
-        ColorValuePair pair2 = new ColorValuePair(ContextCompat.getColor(this, R.color.colorBlue_300), 1.0f);
-        ColorValuePair pair3 = new ColorValuePair(ContextCompat.getColor(this, R.color.colorBlue_400), 1.0f);
-        ColorValuePair pair4 = new ColorValuePair(ContextCompat.getColor(this, R.color.colorGreen_200), 0.5f);
+        ColorValuePair pair0 = new ColorValuePair(ContextCompat.getColor(this, R.color.colorOrange_800), 16.0f);
+        ColorValuePair pair1 = new ColorValuePair(ContextCompat.getColor(this, R.color.colorBlue_200), 10.0f);
+        ColorValuePair pair2 = new ColorValuePair(ContextCompat.getColor(this, R.color.colorBlue_300), 8.0f);
+        ColorValuePair pair3 = new ColorValuePair(ContextCompat.getColor(this, R.color.colorBlue_400), 5.0f);
+        ColorValuePair pair4 = new ColorValuePair(ContextCompat.getColor(this, R.color.colorGreen_200), 2.0f);
 
         // Add pairs to array
         ArrayList<ColorValuePair> values = new ArrayList<>();
@@ -35,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
 
         // Set max value and data for bar graph
         final CustomBarGraph barGraph1 = (CustomBarGraph) findViewById(R.id.barGraph1);
-        barGraph1.setMaxValue(20.0f);
+        barGraph1.setMaxValue(50.0f);
         barGraph1.setData(values);
     }
 }
