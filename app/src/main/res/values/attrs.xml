@@ -10,26 +10,29 @@
         <!-- Fill color of the corner overlay -->
         <attr name="cornerOverlayColor" format="color" />
 
-        <!-- Fill color of the scale -->
-        <attr name="scaleMarkerColor" format="color" />
+        <!-- Fill color of the scale lines -->
+        <attr name="scaleLineColor" format="color" />
 
-        <!-- The height of each scale marker (if provided) -->
-        <attr name="scaleMarkerHeight" format="dimension" />
+        <!-- The height of each scale line (if provided) -->
+        <attr name="scaleLineHeight" format="dimension" />
 
-        <!-- The width of each scale marker (if provided) -->
-        <attr name="scaleMarkerWidth" format="dimension" />
+        <!-- The width of each scale line (if provided) -->
+        <attr name="scaleLineWidth" format="dimension" />
 
-        <!-- The top padding of each scale marker (if provided) -->
-        <attr name="scaleMarkerTopPadding" format="dimension" />
+        <!-- The top padding of each scale line (if provided) -->
+        <attr name="scaleLineTopPadding" format="dimension" />
 
-        <!-- How often the scale marker should repeat (value between 1-100) -->
-        <attr name="scaleMarkerRepeatPercentage" format="integer" />
+        <!-- How often the scale line should repeat (min 1, max 100) -->
+        <attr name="scaleLineRepeatPercentage" format="integer" />
 
         <!-- If you should hide the start line -->
-        <attr name="scaleMarkerHideStartLine" format="boolean" />
+        <attr name="scaleHideStartLine" format="boolean" />
 
         <!-- If you should hide the end line -->
-        <attr name="scaleMarkerHideEndLine" format="boolean" />
+        <attr name="scaleHideEndLine" format="boolean" />
+
+        <!-- If you should show line percentages (based off the max value) -->
+        <attr name="scaleShowLinePercentages" format="boolean" />
 
     </declare-styleable>
 </resources>

@@ -26,13 +26,14 @@
             custom:barHeight="@dimen/barHeight"
             custom:baseColor="@color/colorGrey_200"
             custom:cornerOverlayColor="@color/colorWhite"
-            custom:scaleMarkerColor="@color/colorGrey_300"
-            custom:scaleMarkerHeight="@dimen/scaleMarkerHeight"
-            custom:scaleMarkerHideEndLine="true"
-            custom:scaleMarkerHideStartLine="true"
-            custom:scaleMarkerRepeatPercentage="@integer/scaleMarkerRepeatPercentage"
-            custom:scaleMarkerTopPadding="@dimen/scaleMarkerTopPadding"
-            custom:scaleMarkerWidth="@dimen/scaleMarkerWidth" />
+            custom:scaleHideEndLine="false"
+            custom:scaleHideStartLine="false"
+            custom:scaleLineColor="@color/colorGrey_200"
+            custom:scaleLineHeight="@dimen/scaleLineHeight"
+            custom:scaleLineRepeatPercentage="@integer/scaleLineRepeatPercentage"
+            custom:scaleLineTopPadding="@dimen/scaleLineTopPadding"
+            custom:scaleLineWidth="@dimen/scaleLineWidth"
+            custom:scaleShowLinePercentages="true" />
 
     </LinearLayout>
 

@@ -8,6 +8,7 @@ import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.RectF;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
 
 import java.util.ArrayList;
@@ -17,30 +18,31 @@ import ca.jmdv.bargraphtester.models.ColorValuePair;
 
 public class CustomBarGraph extends View {
 
-    // TODO 1: Add marker labels
+    // TODO 1: Add line labels
     // TODO 2: Add ability for primary labels
     // TODO 3: Add ability for secondary labels
 
     private static final String TAG = CustomBarGraph.class.getSimpleName();
 
-    private static final int MIN_SCALE_MARKER_REPEAT_PERCENTAGE = 1;
-    private static final int MAX_SCALE_MARKER_REPEAT_PERCENTAGE = 100;
-    private static final int DEFAULT_SCALE_MARKER_REPEAT_PERCENTAGE = 10;
-    private static final int DEFAULT_SCALE_MARKER_WIDTH = 2;
+    private static final int MIN_SCALE_LINE_REPEAT_PERCENTAGE = 1;
+    private static final int MAX_SCALE_LINE_REPEAT_PERCENTAGE = 100;
+    private static final int DEFAULT_SCALE_LINE_REPEAT_PERCENTAGE = 10;
+    private static final int DEFAULT_SCALE_LINE_WIDTH = 2;
 
-    private float maxValue = 100;
+    private float maxValue = MAX_SCALE_LINE_REPEAT_PERCENTAGE;
     private float currentFillLength = 0;
     private int barHeight;
-    private int scaleMarkerHeight;
-    private int scaleMarkerWidth;
-    private int scaleMarkerRepeatPercentage;
-    private int scaleMarkerTopPadding;
+    private int scaleLineHeight;
+    private int scaleLineWidth;
+    private int scaleLineRepeatPercentage;
+    private int scaleLineTopPadding;
     private Paint barBasePaint;
-    private Paint scaleMarkerPaint;
+    private Paint scaleLinePaint;
     private Paint cornerOverlayPaint;
     private Paint transparentPaint;
-    private boolean scaleMarkerHideStartLine;
-    private boolean scaleMarkerHideEndLine;
+    private boolean scaleHideStartLine;
+    private boolean scaleHideEndLine;
+    private boolean scaleShowLinePercentages;
 
     ArrayList<ColorValuePair> rawData;
     ArrayList<Paint> readyColors;
@@ -74,16 +76,16 @@ public class CustomBarGraph extends View {
         }
     }
 
-    private float setValue(float newValue) {
-        float currentValue;
-        if (newValue < 0) {
-            currentValue = 0;
-        } else if (newValue > maxValue) {
-            currentValue = maxValue;
+    private float setValue(float value) {
+        float returnValue;
+        if (value < 0) {
+            returnValue = 0;
+        } else if (value > maxValue) {
+            returnValue = maxValue;
         } else {
-            currentValue = newValue;
+            returnValue = value;
         }
-        return currentValue;
+        return returnValue;
     }
 
     private void init(Context context, AttributeSet attrs) {
@@ -94,19 +96,21 @@ public class CustomBarGraph extends View {
 
         // Dimensions
         barHeight = ta.getDimensionPixelSize(R.styleable.CustomBarGraph_barHeight, 0);
-        scaleMarkerHeight = ta.getDimensionPixelSize(R.styleable.CustomBarGraph_scaleMarkerHeight, 0);
-        scaleMarkerWidth = ta.getDimensionPixelSize(R.styleable.CustomBarGraph_scaleMarkerWidth, DEFAULT_SCALE_MARKER_WIDTH);
-        scaleMarkerTopPadding = ta.getDimensionPixelSize(R.styleable.CustomBarGraph_scaleMarkerTopPadding, 0);
+        scaleLineHeight = ta.getDimensionPixelSize(R.styleable.CustomBarGraph_scaleLineHeight, 0);
+        scaleLineWidth = ta.getDimensionPixelSize(R.styleable.CustomBarGraph_scaleLineWidth, DEFAULT_SCALE_LINE_WIDTH);
+        scaleLineTopPadding = ta.getDimensionPixelSize(R.styleable.CustomBarGraph_scaleLineTopPadding, 0);
 
         // Integers
-        scaleMarkerRepeatPercentage = ta.getInteger(R.styleable.CustomBarGraph_scaleMarkerRepeatPercentage, DEFAULT_SCALE_MARKER_REPEAT_PERCENTAGE);
+        scaleLineRepeatPercentage = ta.getInteger(R.styleable.CustomBarGraph_scaleLineRepeatPercentage, DEFAULT_SCALE_LINE_REPEAT_PERCENTAGE);
 
         // Booleans
-        scaleMarkerHideStartLine = ta.getBoolean(R.styleable.CustomBarGraph_scaleMarkerHideStartLine, true);
-        scaleMarkerHideEndLine = ta.getBoolean(R.styleable.CustomBarGraph_scaleMarkerHideEndLine, true);
+        scaleHideStartLine = ta.getBoolean(R.styleable.CustomBarGraph_scaleHideStartLine, true);
+        scaleHideEndLine = ta.getBoolean(R.styleable.CustomBarGraph_scaleHideEndLine, true);
+        scaleShowLinePercentages = ta.getBoolean(R.styleable.CustomBarGraph_scaleShowLinePercentages, true);
 
+        // Colors
         int baseColor = ta.getColor(R.styleable.CustomBarGraph_baseColor, Color.BLACK);
-        int scaleMarkerColor = ta.getColor(R.styleable.CustomBarGraph_scaleMarkerColor, Color.BLACK);
+        int scaleLineColor = ta.getColor(R.styleable.CustomBarGraph_scaleLineColor, Color.BLACK);
         int cornerOverlayColor = ta.getColor(R.styleable.CustomBarGraph_cornerOverlayColor, Color.TRANSPARENT);
 
         ta.recycle();
@@ -114,8 +118,8 @@ public class CustomBarGraph extends View {
         barBasePaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         barBasePaint.setColor(baseColor);
 
-        scaleMarkerPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
-        scaleMarkerPaint.setColor(scaleMarkerColor);
+        scaleLinePaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+        scaleLinePaint.setColor(scaleLineColor);
 
         cornerOverlayPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         cornerOverlayPaint.setColor(cornerOverlayColor);
@@ -124,14 +128,9 @@ public class CustomBarGraph extends View {
         transparentPaint.setColor(Color.TRANSPARENT);
     }
 
-    private int measureHeight(int measureSpec) {
-        int size = barHeight + scaleMarkerTopPadding + scaleMarkerHeight + getPaddingTop() + getPaddingBottom();
-        return resolveSizeAndState(size, measureSpec, 0);
-    }
-
-    private int measureWidth(int measureSpec) {
-        int size = getPaddingLeft() + getPaddingRight();
-        return resolveSizeAndState(size, measureSpec, 0);
+    @Override
+    protected void onSizeChanged(int xNew, int yNew, int xOld, int yOld) {
+        super.onSizeChanged(xNew, yNew, xOld, yOld);
     }
 
     @Override
@@ -146,7 +145,8 @@ public class CustomBarGraph extends View {
             drawBar(canvas, readyColors.get(i), readyValues.get(i));
         }
         drawCornerOverlays(canvas);
-        drawScaleMarkers(canvas);
+        drawScaleLines(canvas);
+        drawScaleLabels(canvas);
     }
 
     private void drawBase(Canvas canvas) {
@@ -159,44 +159,6 @@ public class CustomBarGraph extends View {
         float right = left + barLength;
         RectF rect = new RectF(left, top, right, bottom);
         canvas.drawRect(rect, barBasePaint);
-    }
-
-    private int boundPercentage(int percentage) {
-        if (percentage < MIN_SCALE_MARKER_REPEAT_PERCENTAGE) {
-            percentage = MIN_SCALE_MARKER_REPEAT_PERCENTAGE;
-        } else if (percentage > MAX_SCALE_MARKER_REPEAT_PERCENTAGE) {
-            percentage = MAX_SCALE_MARKER_REPEAT_PERCENTAGE;
-        }
-        return percentage;
-    }
-
-    private void drawScaleMarkers(Canvas canvas) {
-
-        scaleMarkerRepeatPercentage = boundPercentage(scaleMarkerRepeatPercentage);
-
-        RectF fillRect;
-        float left;
-        float right;
-
-        float barLength = getWidth() - getPaddingRight() - getPaddingLeft();
-        float barCenter = getBarCenter();
-        float halfBarHeight = barHeight / 2;
-        float top = barCenter + halfBarHeight + scaleMarkerTopPadding;
-        float bottom = top + scaleMarkerHeight;
-
-        int markerCount = (100 / scaleMarkerRepeatPercentage) + 1;
-        float markerSpace = (barLength - (markerCount * scaleMarkerWidth)) / (markerCount - 1);
-
-        for (int i = 0; i < markerCount; i++) {
-            left = getPaddingLeft() + (i * scaleMarkerWidth) + (i * markerSpace);
-            right = left + scaleMarkerWidth;
-            fillRect = new RectF(left, top, right, bottom);
-            if ((scaleMarkerHideStartLine && i == 0) || (scaleMarkerHideEndLine && i == markerCount - 1)) {
-                canvas.drawRect(fillRect, transparentPaint);
-            } else {
-                canvas.drawRect(fillRect, scaleMarkerPaint);
-            }
-        }
     }
 
     private void drawBar(Canvas canvas, Paint fillPaint, float valueToDraw) {
@@ -287,14 +249,64 @@ public class CustomBarGraph extends View {
         canvas.drawPath(path, cornerOverlayPaint);
     }
 
+    private void drawScaleLines(Canvas canvas) {
+
+        scaleLineRepeatPercentage = boundPercentage(scaleLineRepeatPercentage);
+
+        RectF fillRect;
+        float left;
+        float right;
+
+        float barLength = getWidth() - getPaddingRight() - getPaddingLeft();
+        float barCenter = getBarCenter();
+        float halfBarHeight = barHeight / 2;
+        float top = barCenter + halfBarHeight + scaleLineTopPadding;
+        float bottom = top + scaleLineHeight;
+
+        int lineCount = (MAX_SCALE_LINE_REPEAT_PERCENTAGE / scaleLineRepeatPercentage) + 1;
+        float lineSpace = (barLength - (lineCount * scaleLineWidth)) / (lineCount - 1);
+
+        for (int i = 0; i < lineCount; i++) {
+            left = getPaddingLeft() + (i * scaleLineWidth) + (i * lineSpace);
+            right = left + scaleLineWidth;
+            fillRect = new RectF(left, top, right, bottom);
+            if ((scaleHideStartLine && i == 0) || (scaleHideEndLine && i == lineCount - 1)) {
+                canvas.drawRect(fillRect, transparentPaint);
+            } else {
+                canvas.drawRect(fillRect, scaleLinePaint);
+            }
+        }
+    }
+
+    private void drawScaleLabels(Canvas canvas) {
+        int lineCount = (MAX_SCALE_LINE_REPEAT_PERCENTAGE / scaleLineRepeatPercentage);
+        Log.d(TAG, "drawScaleLabels: " + scaleShowLinePercentages + " | " + lineCount + " | " + maxValue + " | " + (maxValue / lineCount));
+        // TODO: Display percentages below lines
+
+    }
+
     private float getBarCenter() {
-        float barCenter = (getHeight() - scaleMarkerHeight - scaleMarkerTopPadding - getPaddingTop() - getPaddingBottom()) / 2;
+        float barCenter = (getHeight() - scaleLineHeight - scaleLineTopPadding - getPaddingTop() - getPaddingBottom()) / 2;
         barCenter += getPaddingTop();
         return barCenter;
     }
 
-    @Override
-    protected void onSizeChanged(int xNew, int yNew, int xOld, int yOld) {
-        super.onSizeChanged(xNew, yNew, xOld, yOld);
+    private int measureHeight(int measureSpec) {
+        int size = barHeight + scaleLineTopPadding + scaleLineHeight + getPaddingTop() + getPaddingBottom();
+        return resolveSizeAndState(size, measureSpec, 0);
+    }
+
+    private int measureWidth(int measureSpec) {
+        int size = getPaddingLeft() + getPaddingRight();
+        return resolveSizeAndState(size, measureSpec, 0);
+    }
+
+    private int boundPercentage(int percentage) {
+        if (percentage < MIN_SCALE_LINE_REPEAT_PERCENTAGE) {
+            percentage = MIN_SCALE_LINE_REPEAT_PERCENTAGE;
+        } else if (percentage > MAX_SCALE_LINE_REPEAT_PERCENTAGE) {
+            percentage = MAX_SCALE_LINE_REPEAT_PERCENTAGE;
+        }
+        return percentage;
     }
 }

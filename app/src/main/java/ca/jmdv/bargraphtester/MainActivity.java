@@ -23,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
         ColorValuePair pair1 = new ColorValuePair(ContextCompat.getColor(this, R.color.colorBlue_200), 5.0f);
         ColorValuePair pair2 = new ColorValuePair(ContextCompat.getColor(this, R.color.colorBlue_300), 1.0f);
         ColorValuePair pair3 = new ColorValuePair(ContextCompat.getColor(this, R.color.colorBlue_400), 1.0f);
-        ColorValuePair pair4 = new ColorValuePair(ContextCompat.getColor(this, R.color.colorGreen_200), 3.0f);
+        ColorValuePair pair4 = new ColorValuePair(ContextCompat.getColor(this, R.color.colorGreen_200), 0.5f);
 
         // Add pairs to array
         ArrayList<ColorValuePair> values = new ArrayList<>();
