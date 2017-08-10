@@ -37,7 +37,7 @@
             custom:scaleLineHeight="@dimen/scaleLineHeight"
             custom:scaleLinePercentageTextColor="@color/colorGrey_500"
             custom:scaleLinePercentageTextSize="@dimen/scaleLinePercentageTextSize"
-            custom:scaleLineRepeatPercentage="@integer/scaleLineRepeatPercentage"
+            custom:scaleLineRepeatPercentage="25"
             custom:scaleLineTopPadding="@dimen/scaleLineTopPadding"
             custom:scaleLineWidth="@dimen/scaleLineWidth"
             custom:scaleShowLinePercentages="true" />

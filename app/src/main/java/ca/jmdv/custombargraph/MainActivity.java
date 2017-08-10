@@ -22,11 +22,11 @@ public class MainActivity extends AppCompatActivity {
         // SAMPLE 1
 
         // Create color/value pairs
-        DataItem pair0 = new DataItem(ContextCompat.getColor(this, R.color.colorOrange_800), 16.0f, null, null);
-        DataItem pair1 = new DataItem(ContextCompat.getColor(this, R.color.colorBlue_200), 10.0f, null, null);
-        DataItem pair2 = new DataItem(ContextCompat.getColor(this, R.color.colorBlue_300), 8.0f, null, null);
-        DataItem pair3 = new DataItem(ContextCompat.getColor(this, R.color.colorBlue_400), 5.0f, null, null);
-        DataItem pair4 = new DataItem(ContextCompat.getColor(this, R.color.colorGreen_200), 2.0f, null, null);
+        DataItem pair0 = new DataItem(ContextCompat.getColor(this, R.color.colorOrange_800), 1.0f, null, null);
+        DataItem pair1 = new DataItem(ContextCompat.getColor(this, R.color.colorBlue_200), 0.1f, null, null);
+        DataItem pair2 = new DataItem(ContextCompat.getColor(this, R.color.colorBlue_300), 0.05f, null, null);
+        DataItem pair3 = new DataItem(ContextCompat.getColor(this, R.color.colorBlue_400), 1.0f, null, null);
+        DataItem pair4 = new DataItem(ContextCompat.getColor(this, R.color.colorGreen_200), 1.1f, null, null);
 
         // Add pairs to array
         ArrayList<DataItem> values = new ArrayList<>();
@@ -38,18 +38,18 @@ public class MainActivity extends AppCompatActivity {
 
         // Set max value and data for bar graph
         final CustomBarGraph barGraph1 = (CustomBarGraph) findViewById(R.id.barGraph1);
-        barGraph1.setMaxValue(50.0f);
+        barGraph1.setMaxValue(4.3f);
         barGraph1.setData(values);
 
         // *************************************************************************************
         // SAMPLE 2
 
         // Create color/value pairs
-        pair0 = new DataItem(ContextCompat.getColor(this, R.color.colorBlue_300), 10.0f, getString(R.string.primary_label_1), getString(R.string.secondary_label_1));
-        pair1 = new DataItem(ContextCompat.getColor(this, R.color.colorBlue_400), 10.0f, getString(R.string.primary_label_2), getString(R.string.secondary_label_2));
-        pair2 = new DataItem(ContextCompat.getColor(this, R.color.colorBlue_500), 10.0f, getString(R.string.primary_label_3), getString(R.string.secondary_label_3));
-        pair3 = new DataItem(ContextCompat.getColor(this, R.color.colorBlue_600), 10.0f, getString(R.string.primary_label_4), getString(R.string.secondary_label_4));
-        pair4 = new DataItem(ContextCompat.getColor(this, R.color.colorBlue_700), 10.0f, getString(R.string.primary_label_5), getString(R.string.secondary_label_5));
+        pair0 = new DataItem(ContextCompat.getColor(this, R.color.colorBlue_300), 1.0f, getString(R.string.primary_label_1), getString(R.string.secondary_label_1));
+        pair1 = new DataItem(ContextCompat.getColor(this, R.color.colorBlue_400), 1.0f, getString(R.string.primary_label_2), getString(R.string.secondary_label_2));
+        pair2 = new DataItem(ContextCompat.getColor(this, R.color.colorBlue_500), 1.0f, getString(R.string.primary_label_3), getString(R.string.secondary_label_3));
+        pair3 = new DataItem(ContextCompat.getColor(this, R.color.colorBlue_600), 1.0f, getString(R.string.primary_label_4), getString(R.string.secondary_label_4));
+        pair4 = new DataItem(ContextCompat.getColor(this, R.color.colorBlue_700), 0.5f, getString(R.string.primary_label_5), getString(R.string.secondary_label_5));
 
         // Add pairs to array
         values = new ArrayList<>();
@@ -61,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
 
         // Set max value and data for bar graph
         final CustomBarGraph barGraph2 = (CustomBarGraph) findViewById(R.id.barGraph2);
-        barGraph2.setMaxValue(50.0f);
+        barGraph2.setMaxValue(5.0f);
         barGraph2.setData(values);
 
         // *************************************************************************************

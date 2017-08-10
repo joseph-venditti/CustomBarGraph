@@ -13,6 +13,8 @@ import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.View;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 
 import ca.jmdv.custombargraph.R;
@@ -399,10 +401,15 @@ public class CustomBarGraph extends View {
         float lineSpace = (barLength - (lineCount * scaleLineWidth)) / (lineCount - 1);
 
         String label;
+        float valueF;
 
         for (int i = 0; i < lineCount; i++) {
             fillRect = new Rect();
-            label = (i * (maxValue / (lineCount - 1))) + PERCENTAGE_SYMBOL;
+            valueF = (i * (maxValue / (lineCount - 1)));
+            valueF = BigDecimal.valueOf(valueF)
+                    .setScale(3, RoundingMode.HALF_UP)
+                    .floatValue();
+            label = valueF + PERCENTAGE_SYMBOL;
             scaleLinePercentagePaint.getTextBounds(label, 0, label.length(), fillRect);
             left = getPaddingLeft() + (i * scaleLineWidth) + (i * lineSpace) - (fillRect.width() / 2);
             canvas.drawText(label, left, top, scaleLinePercentagePaint);
