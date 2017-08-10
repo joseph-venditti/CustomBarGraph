@@ -43,5 +43,35 @@
         <!-- The text color of the line percentage labels (if provided) -->
         <attr name="scaleLinePercentageTextColor" format="color" />
 
+        <!-- If you should show primary labels -->
+        <attr name="showPrimaryLabels" format="boolean" />
+
+        <!-- If you should show secondary labels -->
+        <attr name="showSecondaryLabels" format="boolean" />
+
+        <!-- The text size of the primary labels (if provided) -->
+        <attr name="primaryLabelTextSize" format="dimension" />
+
+        <!-- The text color of the primary labels (if provided) -->
+        <attr name="primaryLabelTextColor" format="color" />
+
+        <!-- The top padding of the primary labels (if provided) -->
+        <attr name="primaryLabelTopPadding" format="dimension" />
+
+        <!-- The bottom padding of the primary labels (if provided) -->
+        <attr name="primaryLabelBottomPadding" format="dimension" />
+
+        <!-- The text size of the secondary labels (if provided) -->
+        <attr name="secondaryLabelTextSize" format="dimension" />
+
+        <!-- The text color of the secondary labels (if provided) -->
+        <attr name="secondaryLabelTextColor" format="color" />
+
+        <!-- The top padding of the secondary labels (if provided) -->
+        <attr name="secondaryLabelTopPadding" format="dimension" />
+
+        <!-- The bottom padding of the secondary labels (if provided) -->
+        <attr name="secondaryLabelBottomPadding" format="dimension" />
+
     </declare-styleable>
 </resources>

@@ -1,4 +1,4 @@
-package ca.jmdv.bargraphtester;
+package ca.jmdv.custombargraph;
 
 import org.junit.Test;
 

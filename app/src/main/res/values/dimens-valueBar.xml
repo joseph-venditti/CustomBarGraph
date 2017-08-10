@@ -2,6 +2,8 @@
 <resources>
 
     <!-- Dimensions -->
+    <dimen name="marginTop">16dp</dimen>
+    <dimen name="marginBottom">16dp</dimen>
     <dimen name="paddingTop">12dp</dimen>
     <dimen name="paddingBottom">12dp</dimen>
     <dimen name="paddingHorizontal">24dp</dimen>
@@ -11,6 +13,12 @@
     <dimen name="scaleLineTopPadding">4dp</dimen>
     <dimen name="scaleLineBottomPadding">4dp</dimen>
     <dimen name="scaleLinePercentageTextSize">12dp</dimen>
+    <dimen name="primaryLabelTextSize">14dp</dimen>
+    <dimen name="secondaryLabelTextSize">10dp</dimen>
+    <dimen name="primaryLabelTopPadding">12dp</dimen>
+    <dimen name="primaryLabelBottomPadding">2dp</dimen>
+    <dimen name="secondaryLabelTopPadding">2dp</dimen>
+    <dimen name="secondaryLabelBottomPadding">0dp</dimen>
 
     <!-- Integers -->
     <integer name="scaleLineRepeatPercentage">20</integer>

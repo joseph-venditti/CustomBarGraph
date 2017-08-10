@@ -1,20 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:custom="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:background="@color/colorWhite"
-    tools:context="ca.jmdv.bargraphtester.MainActivity">
+    tools:context="ca.jmdv.custombargraph.MainActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:orientation="vertical"
-        android:padding="20dp">
+        android:orientation="vertical">
 
-        <ca.jmdv.bargraphtester.views.CustomBarGraph
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginBottom="@dimen/marginBottom"
+            android:background="@color/colorGrey_200" />
+
+        <ca.jmdv.custombargraph.views.CustomBarGraph
             android:id="@+id/barGraph1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -38,6 +42,137 @@
             custom:scaleLineWidth="@dimen/scaleLineWidth"
             custom:scaleShowLinePercentages="true" />
 
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginBottom="@dimen/marginBottom"
+            android:layout_marginTop="@dimen/marginTop"
+            android:background="@color/colorGrey_200" />
+
+        <ca.jmdv.custombargraph.views.CustomBarGraph
+            android:id="@+id/barGraph2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorWhite"
+            android:paddingBottom="@dimen/paddingTop"
+            android:paddingLeft="@dimen/paddingHorizontal"
+            android:paddingRight="@dimen/paddingHorizontal"
+            android:paddingTop="@dimen/paddingTop"
+            custom:barHeight="@dimen/barHeight"
+            custom:baseColor="@color/colorGrey_200"
+            custom:cornerOverlayColor="@color/colorWhite"
+            custom:primaryLabelBottomPadding="@dimen/primaryLabelBottomPadding"
+            custom:primaryLabelTextColor="@color/colorGrey_500"
+            custom:primaryLabelTextSize="@dimen/primaryLabelTextSize"
+            custom:primaryLabelTopPadding="@dimen/primaryLabelTopPadding"
+            custom:secondaryLabelBottomPadding="@dimen/secondaryLabelBottomPadding"
+            custom:secondaryLabelTextColor="@color/colorGrey_400"
+            custom:secondaryLabelTextSize="@dimen/primaryLabelTextSize"
+            custom:secondaryLabelTopPadding="@dimen/secondaryLabelTopPadding"
+            custom:showPrimaryLabels="true"
+            custom:showSecondaryLabels="true" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginBottom="@dimen/marginBottom"
+            android:layout_marginTop="@dimen/marginTop"
+            android:background="@color/colorGrey_200" />
+
+        <ca.jmdv.custombargraph.views.CustomBarGraph
+            android:id="@+id/barGraph3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorWhite"
+            android:paddingBottom="@dimen/paddingTop"
+            android:paddingLeft="@dimen/paddingHorizontal"
+            android:paddingRight="@dimen/paddingHorizontal"
+            android:paddingTop="@dimen/paddingTop"
+            custom:barHeight="@dimen/barHeight"
+            custom:baseColor="@color/colorGrey_200"
+            custom:cornerOverlayColor="@color/colorWhite"
+            custom:primaryLabelBottomPadding="0dp"
+            custom:primaryLabelTextColor="@color/colorGrey_500"
+            custom:primaryLabelTextSize="@dimen/primaryLabelTextSize"
+            custom:primaryLabelTopPadding="16dp"
+            custom:showPrimaryLabels="true"
+            custom:showSecondaryLabels="false" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginBottom="@dimen/marginBottom"
+            android:layout_marginTop="@dimen/marginTop"
+            android:background="@color/colorGrey_200" />
+
+        <ca.jmdv.custombargraph.views.CustomBarGraph
+            android:id="@+id/barGraph4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorWhite"
+            android:paddingBottom="@dimen/paddingTop"
+            android:paddingLeft="@dimen/paddingHorizontal"
+            android:paddingRight="@dimen/paddingHorizontal"
+            android:paddingTop="@dimen/paddingTop"
+            custom:barHeight="@dimen/barHeight"
+            custom:baseColor="@color/colorGrey_200"
+            custom:cornerOverlayColor="@android:color/transparent"
+            custom:primaryLabelBottomPadding="@dimen/primaryLabelBottomPadding"
+            custom:primaryLabelTextColor="@color/colorGrey_500"
+            custom:primaryLabelTextSize="@dimen/primaryLabelTextSize"
+            custom:primaryLabelTopPadding="@dimen/primaryLabelTopPadding"
+            custom:scaleHideEndLine="false"
+            custom:scaleHideStartLine="false"
+            custom:scaleLineBottomPadding="@dimen/scaleLineBottomPadding"
+            custom:scaleLineColor="@color/colorGrey_300"
+            custom:scaleLineHeight="@dimen/scaleLineHeight"
+            custom:scaleLinePercentageTextColor="@color/colorGrey_500"
+            custom:scaleLinePercentageTextSize="@dimen/scaleLinePercentageTextSize"
+            custom:scaleLineRepeatPercentage="@integer/scaleLineRepeatPercentage"
+            custom:scaleLineTopPadding="@dimen/scaleLineTopPadding"
+            custom:scaleLineWidth="@dimen/scaleLineWidth"
+            custom:scaleShowLinePercentages="true"
+            custom:secondaryLabelBottomPadding="@dimen/secondaryLabelBottomPadding"
+            custom:secondaryLabelTextColor="@color/colorGrey_400"
+            custom:secondaryLabelTextSize="@dimen/primaryLabelTextSize"
+            custom:secondaryLabelTopPadding="@dimen/secondaryLabelTopPadding"
+            custom:showPrimaryLabels="true"
+            custom:showSecondaryLabels="true" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginBottom="@dimen/marginBottom"
+            android:layout_marginTop="@dimen/marginTop"
+            android:background="@color/colorGrey_200" />
+
+        <ca.jmdv.custombargraph.views.CustomBarGraph
+            android:id="@+id/barGraph5"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorWhite"
+            android:paddingBottom="@dimen/paddingTop"
+            android:paddingLeft="@dimen/paddingHorizontal"
+            android:paddingRight="@dimen/paddingHorizontal"
+            android:paddingTop="@dimen/paddingTop"
+            custom:barHeight="@dimen/barHeight"
+            custom:baseColor="@color/colorGrey_200"
+            custom:cornerOverlayColor="@color/colorWhite"
+            custom:scaleHideEndLine="true"
+            custom:scaleHideStartLine="true"
+            custom:scaleLineColor="@color/colorGrey_300"
+            custom:scaleLineHeight="@dimen/scaleLineHeight"
+            custom:scaleLineRepeatPercentage="33"
+            custom:scaleLineTopPadding="@dimen/scaleLineTopPadding"
+            custom:scaleLineWidth="@dimen/scaleLineWidth"
+            custom:scaleShowLinePercentages="false" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="@dimen/marginTop"
+            android:background="@color/colorGrey_200" />
+
     </LinearLayout>
 
-</RelativeLayout>
+</ScrollView>
