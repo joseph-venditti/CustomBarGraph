@@ -30,7 +30,7 @@ public class CustomBarGraph extends View {
     private static final int DEFAULT_SCALE_LINE_REPEAT_PERCENTAGE = 10;
     private static final int DEFAULT_SCALE_LINE_WIDTH = 2;
     private static final String PERCENTAGE_SYMBOL = "%";
-    private static final String TEXT_CLIPPED_SYMBOL = "...";
+    private static final String TEXT_CLIPPED_SYMBOL = ".";
 
     private float maxValue = MAX_SCALE_LINE_REPEAT_PERCENTAGE;
     private float currentFillLength = 0;
@@ -82,6 +82,16 @@ public class CustomBarGraph extends View {
     public void setData(ArrayList<DataItem> data) {
         //Log.d(TAG, "setData");
         this.rawData = data;
+    }
+
+    public void setShowLinePercentages(boolean showLinePercentages) {
+        //Log.d(TAG, "setShowLinePercentages");
+        this.scaleShowLinePercentages = showLinePercentages;
+    }
+
+    public void setScaleLineRepeatPercentage(int scaleLineRepeatPercentage) {
+        //Log.d(TAG, "setScaleLineRepeatPercentage");
+        this.scaleLineRepeatPercentage = scaleLineRepeatPercentage;
     }
 
     private void processData() {

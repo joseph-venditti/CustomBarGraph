@@ -45,10 +45,10 @@ public class MainActivity extends AppCompatActivity {
         // SAMPLE 2
 
         // Create color/value pairs
-        pair0 = new DataItem(ContextCompat.getColor(this, R.color.colorBlue_300), 1.0f, getString(R.string.primary_label_1), getString(R.string.secondary_label_1));
-        pair1 = new DataItem(ContextCompat.getColor(this, R.color.colorBlue_400), 1.0f, getString(R.string.primary_label_2), getString(R.string.secondary_label_2));
-        pair2 = new DataItem(ContextCompat.getColor(this, R.color.colorBlue_500), 1.0f, getString(R.string.primary_label_3), getString(R.string.secondary_label_3));
-        pair3 = new DataItem(ContextCompat.getColor(this, R.color.colorBlue_600), 1.0f, getString(R.string.primary_label_4), getString(R.string.secondary_label_4));
+        pair0 = new DataItem(ContextCompat.getColor(this, R.color.colorBlue_300), 0.5f, getString(R.string.primary_label_1), getString(R.string.secondary_label_1));
+        pair1 = new DataItem(ContextCompat.getColor(this, R.color.colorBlue_400), 0.5f, getString(R.string.primary_label_2), getString(R.string.secondary_label_2));
+        pair2 = new DataItem(ContextCompat.getColor(this, R.color.colorBlue_500), 0.5f, getString(R.string.primary_label_3), getString(R.string.secondary_label_3));
+        pair3 = new DataItem(ContextCompat.getColor(this, R.color.colorBlue_600), 3.0f, getString(R.string.primary_label_4), getString(R.string.secondary_label_4));
         pair4 = new DataItem(ContextCompat.getColor(this, R.color.colorBlue_700), 0.5f, getString(R.string.primary_label_5), getString(R.string.secondary_label_5));
 
         // Add pairs to array
@@ -61,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
 
         // Set max value and data for bar graph
         final CustomBarGraph barGraph2 = (CustomBarGraph) findViewById(R.id.barGraph2);
-        barGraph2.setMaxValue(5.0f);
+        barGraph2.setMaxValue(15.0f);
         barGraph2.setData(values);
 
         // *************************************************************************************
