@@ -49,6 +49,9 @@
         <!-- If you should show secondary labels -->
         <attr name="showSecondaryLabels" format="boolean" />
 
+        <!-- The padding for primary/secondary labels (if provided) -->
+        <attr name="labelPadding" format="dimension" />
+
         <!-- The text size of the primary labels (if provided) -->
         <attr name="primaryLabelTextSize" format="dimension" />
 

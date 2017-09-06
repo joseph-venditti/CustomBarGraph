@@ -11,6 +11,9 @@
     <string name="primary_full_label_1">Primary 1</string>
     <string name="primary_full_label_2">Primary 2</string>
 
+    <string name="secondary_full_label_1">Secondary 1</string>
+    <string name="secondary_full_label_2">Secondary 2</string>
+
     <string name="secondary_label_1">(S1)</string>
     <string name="secondary_label_2">(S2)</string>
     <string name="secondary_label_3">(S3)</string>

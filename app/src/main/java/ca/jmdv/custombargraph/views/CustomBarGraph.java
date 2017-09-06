@@ -1,6 +1,7 @@
 package ca.jmdv.custombargraph.views;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -11,6 +12,7 @@ import android.graphics.RectF;
 import android.graphics.Typeface;
 import android.text.TextUtils;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
 
 import java.math.BigDecimal;
@@ -30,10 +32,10 @@ public class CustomBarGraph extends View {
     private static final int DEFAULT_SCALE_LINE_REPEAT_PERCENTAGE = 10;
     private static final int DEFAULT_SCALE_LINE_WIDTH = 2;
     private static final String PERCENTAGE_SYMBOL = "%";
-    private static final String TEXT_CLIPPED_SYMBOL = ".";
 
     private float maxValue = MAX_SCALE_LINE_REPEAT_PERCENTAGE;
     private float currentFillLength = 0;
+    private float currentLabelPosition = 0;
     private int barHeight;
     private int scaleLineHeight;
     private int scaleLineWidth;
@@ -47,6 +49,7 @@ public class CustomBarGraph extends View {
     private int primaryLabelBottomPadding;
     private int secondaryLabelTopPadding;
     private int secondaryLabelBottomPadding;
+    private int labelPadding;
     private Paint barBasePaint;
     private Paint scaleLinePaint;
     private Paint cornerOverlayPaint;
@@ -73,30 +76,35 @@ public class CustomBarGraph extends View {
     }
 
     public void setMaxValue(float maxValue) {
-        //Log.d(TAG, "setMaxValue: " + maxValue);
         this.maxValue = maxValue;
         invalidate();
         requestLayout();
     }
 
     public void setData(ArrayList<DataItem> data) {
-        //Log.d(TAG, "setData");
         this.rawData = data;
     }
 
     public void setShowLinePercentages(boolean showLinePercentages) {
-        //Log.d(TAG, "setShowLinePercentages");
         this.scaleShowLinePercentages = showLinePercentages;
     }
 
     public void setScaleLineRepeatPercentage(int scaleLineRepeatPercentage) {
-        //Log.d(TAG, "setScaleLineRepeatPercentage");
         this.scaleLineRepeatPercentage = scaleLineRepeatPercentage;
+    }
+
+    public void setLabelPadding(int labelPadding) {
+        this.labelPadding = labelPadding;
+    }
+
+    public void setScaleLineBottomPadding(int padding) {
+        scaleLineBottomPadding = padding;
     }
 
     private void processData() {
         //Log.d(TAG, "processData");
         currentFillLength = 0;
+        currentLabelPosition = 0;
         readyColors = new ArrayList<>();
         readyValues = new ArrayList<>();
         readyPrimaryLabels = new ArrayList<>();
@@ -145,6 +153,7 @@ public class CustomBarGraph extends View {
         primaryLabelBottomPadding = ta.getDimensionPixelSize(R.styleable.CustomBarGraph_primaryLabelBottomPadding, 0);
         secondaryLabelTopPadding = ta.getDimensionPixelSize(R.styleable.CustomBarGraph_secondaryLabelTopPadding, 0);
         secondaryLabelBottomPadding = ta.getDimensionPixelSize(R.styleable.CustomBarGraph_secondaryLabelBottomPadding, 0);
+        labelPadding = ta.getDimensionPixelSize(R.styleable.CustomBarGraph_labelPadding, 0);
         int scaleLinePercentageTextSize = ta.getDimensionPixelSize(R.styleable.CustomBarGraph_scaleLinePercentageTextSize, 0);
         int primaryLabelTextSize = ta.getDimensionPixelSize(R.styleable.CustomBarGraph_primaryLabelTextSize, 0);
         int secondaryLabelTextSize = ta.getDimensionPixelSize(R.styleable.CustomBarGraph_secondaryLabelTextSize, 0);
@@ -236,18 +245,16 @@ public class CustomBarGraph extends View {
         if (readyValues != null && !readyValues.isEmpty()) {
             int size = readyValues.size();
             for (int i = 0; i < size; i++) {
-                drawBar(canvas, readyColors.get(i), readyValues.get(i));
+                drawBar(canvas, readyColors.get(i), readyValues.get(i), readyPrimaryLabels.get(i), readySecondaryLabels.get(i));
             }
             drawCornerOverlays(canvas);
             drawScaleLines(canvas);
             if (scaleShowLinePercentages) {
                 drawScaleLabels(canvas);
             }
-            if (showPrimaryLabels) {
-                drawPrimaryLabels(canvas);
-            }
-            if (showSecondaryLabels) {
-                drawSecondaryLabels(canvas);
+            if (showPrimaryLabels || showSecondaryLabels) {
+                determineLabelDirection();
+                drawLabels(canvas);
             }
         }
     }
@@ -267,10 +274,11 @@ public class CustomBarGraph extends View {
         canvas.drawRect(rect, barBasePaint);
     }
 
-    private void drawBar(Canvas canvas, Paint fillPaint, float valueToDraw) {
+    private void drawBar(Canvas canvas, Paint fillPaint, float valueToDraw, String primaryLabel, String secondaryLabel) {
 
         //Log.d(TAG, "drawBar");
 
+        // Draw the bar
         float barLength = getWidth() - getPaddingRight() - getPaddingLeft();
         float barCenter = getBarCenter();
         float halfBarHeight = barHeight / 2;
@@ -278,14 +286,25 @@ public class CustomBarGraph extends View {
         float bottom = barCenter + halfBarHeight;
         float left = getPaddingLeft() + currentFillLength;
 
-        float percentFilled = valueToDraw / maxValue;
+        // Added 0.0f check to prevent NaN math
+        float percentFilled = (valueToDraw == 0.0f) ? 0.0f : valueToDraw / maxValue;
         float right = left + (barLength * percentFilled);
+
         currentFillLength = currentFillLength + barLength * percentFilled;
         RectF fillRect = new RectF(left, top, right, bottom);
         canvas.drawRect(fillRect, fillPaint);
 
+        // Calculate which label is longer (primary or secondary) and store the longest label width
+        Rect primaryFillRect = new Rect();
+        primaryLabelPaint.getTextBounds(primaryLabel, 0, primaryLabel.length(), primaryFillRect);
+
+        Rect secondaryFillRect = new Rect();
+        secondaryLabelPaint.getTextBounds(secondaryLabel, 0, secondaryLabel.length(), secondaryFillRect);
+
+        float longestLabelWidth = (primaryFillRect.width() > secondaryFillRect.width()) ? primaryFillRect.width() : secondaryFillRect.width();
+
         // Populate meta item array (needed for primary/secondary labels)
-        readyLabelMeta.add(new LabelMetaItem(left, right));
+        readyLabelMeta.add(new LabelMetaItem(left, right, longestLabelWidth));
     }
 
     private void drawCornerOverlays(Canvas canvas) {
@@ -426,55 +445,22 @@ public class CustomBarGraph extends View {
         }
     }
 
-    private void drawPrimaryLabels(Canvas canvas) {
-
-        //Log.d(TAG, "drawPrimaryLabels");
-
-        Rect fillRect;
-        LabelMetaItem item;
-        String primaryLabel;
-
-        float boundsWidth;
-        float barCenter = getBarCenter();
-        float halfBarHeight = barHeight / 2;
-
-        float primaryTop = barCenter +
-                halfBarHeight +
-                scaleLineTopPadding +
-                scaleLineHeight +
-                scaleLineBottomPadding +
-                scaleLabelHeight +
-                primaryLabelTopPadding +
-                primaryLabelHeight;
-
-        int size = readyLabelMeta.size();
-        for (int i = 0; i < size; i++) {
-
-            item = readyLabelMeta.get(i);
-            primaryLabel = readyPrimaryLabels.get(i);
-            boundsWidth = item.getEndBounds() - item.getStartBounds();
-
-            fillRect = new Rect();
-            primaryLabelPaint.getTextBounds(primaryLabel, 0, primaryLabel.length(), fillRect);
-
-            if (fillRect.width() > boundsWidth) {
-                //Log.d(TAG, "------ primaryLabel clipped: '" + fillRect.width() + "' > '" + boundsWidth + "' for label '" + primaryLabel + "'");
-                canvas.drawText(TEXT_CLIPPED_SYMBOL, item.getStartBounds(), primaryTop, primaryLabelPaint);
-            } else {
-                canvas.drawText(primaryLabel, item.getStartBounds(), primaryTop, primaryLabelPaint);
-            }
-        }
+    private void determineLabelDirection() {
+        Log.d(TAG, "determineLabelDirection");
+        // TODO: Determine direction for label drawing (i.e. start to end, or end to start)
     }
 
-    private void drawSecondaryLabels(Canvas canvas) {
+    private void drawLabels(Canvas canvas) {
 
-        //Log.d(TAG, "drawSecondaryLabels");
+        //Log.d(TAG, "drawLabels");
 
-        Rect fillRect;
+        Rect primaryFillRect;
+        Rect secondaryFillRect;
         LabelMetaItem item;
+        String primaryLabel;
         String secondaryLabel;
 
-        float boundsWidth;
+        int size;
         float barCenter = getBarCenter();
         float halfBarHeight = barHeight / 2;
 
@@ -492,21 +478,30 @@ public class CustomBarGraph extends View {
                 secondaryLabelTopPadding +
                 secondaryLabelHeight;
 
-        int size = readyLabelMeta.size();
+        size = readyLabelMeta.size();
+
         for (int i = 0; i < size; i++) {
 
             item = readyLabelMeta.get(i);
+            primaryLabel = readyPrimaryLabels.get(i);
             secondaryLabel = readySecondaryLabels.get(i);
-            boundsWidth = item.getEndBounds() - item.getStartBounds();
 
-            fillRect = new Rect();
-            secondaryLabelPaint.getTextBounds(secondaryLabel, 0, secondaryLabel.length(), fillRect);
+            if (i == 0) {
+                currentLabelPosition = item.getBarStartBounds();
+            }
 
-            if (fillRect.width() > boundsWidth) {
-                //Log.d(TAG, "------ secondaryLabel clipped: '" + fillRect.width() + "' > '" + boundsWidth + "' for label '" + secondaryLabel + "'");
-                canvas.drawText(TEXT_CLIPPED_SYMBOL, item.getStartBounds(), secondaryTop, secondaryLabelPaint);
+            primaryFillRect = new Rect();
+            primaryLabelPaint.getTextBounds(primaryLabel, 0, primaryLabel.length(), primaryFillRect);
+            canvas.drawText(primaryLabel, currentLabelPosition, primaryTop, primaryLabelPaint);
+
+            secondaryFillRect = new Rect();
+            secondaryLabelPaint.getTextBounds(secondaryLabel, 0, secondaryLabel.length(), secondaryFillRect);
+            canvas.drawText(secondaryLabel, currentLabelPosition, secondaryTop, secondaryLabelPaint);
+
+            if (currentLabelPosition + item.getLongestLabelWidth() > item.getBarEndBounds()) {
+                currentLabelPosition = currentLabelPosition + item.getLongestLabelWidth() + dpToPx(labelPadding);
             } else {
-                canvas.drawText(secondaryLabel, item.getStartBounds(), secondaryTop, secondaryLabelPaint);
+                currentLabelPosition = item.getBarEndBounds() + dpToPx(labelPadding);
             }
         }
     }
@@ -562,5 +557,9 @@ public class CustomBarGraph extends View {
             percentage = MAX_SCALE_LINE_REPEAT_PERCENTAGE;
         }
         return percentage;
+    }
+
+    private int dpToPx(int dp) {
+        return (int) (dp * Resources.getSystem().getDisplayMetrics().density);
     }
 }

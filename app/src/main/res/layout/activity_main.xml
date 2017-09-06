@@ -173,6 +173,36 @@
             android:layout_marginTop="@dimen/marginTop"
             android:background="@color/colorGrey_200" />
 
+        <ca.jmdv.custombargraph.views.CustomBarGraph
+            android:id="@+id/barGraph6"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorWhite"
+            android:paddingBottom="@dimen/paddingTop"
+            android:paddingLeft="@dimen/paddingHorizontal"
+            android:paddingRight="@dimen/paddingHorizontal"
+            android:paddingTop="@dimen/paddingTop"
+            custom:barHeight="@dimen/barHeight"
+            custom:baseColor="@color/colorGrey_200"
+            custom:cornerOverlayColor="@color/colorWhite"
+            custom:primaryLabelBottomPadding="@dimen/primaryLabelBottomPadding"
+            custom:primaryLabelTextColor="@color/colorGrey_500"
+            custom:primaryLabelTextSize="@dimen/primaryLabelTextSize"
+            custom:primaryLabelTopPadding="@dimen/primaryLabelTopPadding"
+            custom:secondaryLabelBottomPadding="@dimen/secondaryLabelBottomPadding"
+            custom:secondaryLabelTextColor="@color/colorGrey_400"
+            custom:secondaryLabelTextSize="@dimen/primaryLabelTextSize"
+            custom:secondaryLabelTopPadding="@dimen/secondaryLabelTopPadding"
+            custom:showPrimaryLabels="true"
+            custom:showSecondaryLabels="true" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginBottom="@dimen/marginBottom"
+            android:layout_marginTop="@dimen/marginTop"
+            android:background="@color/colorGrey_200" />
+
     </LinearLayout>
 
 </ScrollView>

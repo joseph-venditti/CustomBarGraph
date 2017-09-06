@@ -6,28 +6,38 @@ package ca.jmdv.custombargraph.models;
 
 public class LabelMetaItem {
 
-    private float startBounds;
-    private float endBounds;
+    private float barStartBounds;
+    private float barEndBounds;
+    private float longestLabelWidth;
 
-    public LabelMetaItem(float startBounds, float endBounds) {
+    public LabelMetaItem(float barStartBounds, float barEndBounds, float longestLabelWidth) {
         super();
-        this.startBounds = startBounds;
-        this.endBounds = endBounds;
+        this.barStartBounds = barStartBounds;
+        this.barEndBounds = barEndBounds;
+        this.longestLabelWidth = longestLabelWidth;
     }
 
-    public float getStartBounds() {
-        return startBounds;
+    public float getBarStartBounds() {
+        return barStartBounds;
     }
 
-    public void setStartBounds(float startBounds) {
-        this.startBounds = startBounds;
+    public void setBarStartBounds(float barStartBounds) {
+        this.barStartBounds = barStartBounds;
     }
 
-    public float getEndBounds() {
-        return endBounds;
+    public float getBarEndBounds() {
+        return barEndBounds;
     }
 
-    public void setEndBounds(float endBounds) {
-        this.endBounds = endBounds;
+    public void setBarEndBounds(float barEndBounds) {
+        this.barEndBounds = barEndBounds;
+    }
+
+    public float getLongestLabelWidth() {
+        return longestLabelWidth;
+    }
+
+    public void setLongestLabelWidth(float longestLabelWidth) {
+        this.longestLabelWidth = longestLabelWidth;
     }
 }
