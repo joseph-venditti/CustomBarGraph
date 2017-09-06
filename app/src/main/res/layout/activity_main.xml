@@ -170,6 +170,7 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
+            android:layout_marginBottom="@dimen/marginBottom"
             android:layout_marginTop="@dimen/marginTop"
             android:background="@color/colorGrey_200" />
 
@@ -199,7 +200,6 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:layout_marginBottom="@dimen/marginBottom"
             android:layout_marginTop="@dimen/marginTop"
             android:background="@color/colorGrey_200" />
 
