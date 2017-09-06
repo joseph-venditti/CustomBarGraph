@@ -8,15 +8,22 @@
     <string name="primary_label_4">P4</string>
     <string name="primary_label_5">P5</string>
 
-    <string name="primary_full_label_1">Primary 1</string>
-    <string name="primary_full_label_2">Primary 2</string>
-
-    <string name="secondary_full_label_1">Secondary 1</string>
-    <string name="secondary_full_label_2">Secondary 2</string>
-
     <string name="secondary_label_1">(S1)</string>
     <string name="secondary_label_2">(S2)</string>
     <string name="secondary_label_3">(S3)</string>
     <string name="secondary_label_4">(S4)</string>
     <string name="secondary_label_5">(S5)</string>
+
+    <string name="primary_full_label_1">Primary 1</string>
+    <string name="primary_full_label_2">Primary 2</string>
+    <string name="primary_full_label_3">Primary 3</string>
+    <string name="primary_full_label_4">Primary 4</string>
+    <string name="primary_full_label_5">Primary 5</string>
+
+    <string name="secondary_full_label_1">Secondary 1</string>
+    <string name="secondary_full_label_2">Secondary 2</string>
+    <string name="secondary_full_label_3">Secondary 3</string>
+    <string name="secondary_full_label_4">Secondary 4</string>
+    <string name="secondary_full_label_5">Secondary 5</string>
+
 </resources>

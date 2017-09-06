@@ -12,7 +12,6 @@ import android.graphics.RectF;
 import android.graphics.Typeface;
 import android.text.TextUtils;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.View;
 
 import java.math.BigDecimal;
@@ -62,6 +61,7 @@ public class CustomBarGraph extends View {
     private boolean scaleShowLinePercentages;
     private boolean showPrimaryLabels;
     private boolean showSecondaryLabels;
+    private boolean positionLabelsFromLeftToRight;
 
     ArrayList<DataItem> rawData;
     ArrayList<LabelMetaItem> readyLabelMeta;
@@ -446,8 +446,34 @@ public class CustomBarGraph extends View {
     }
 
     private void determineLabelDirection() {
-        Log.d(TAG, "determineLabelDirection");
-        // TODO: Determine direction for label drawing (i.e. start to end, or end to start)
+
+        //Log.d(TAG, "determineLabelDirection");
+
+        LabelMetaItem item;
+        int size = readyLabelMeta.size();
+        for (int i = 0; i < size; i++) {
+            item = readyLabelMeta.get(i);
+            if (i == 0) {
+                currentLabelPosition = item.getBarStartBounds();
+            }
+            if (currentLabelPosition + item.getLongestLabelWidth() > item.getBarEndBounds()) {
+                currentLabelPosition = currentLabelPosition + item.getLongestLabelWidth() + dpToPx(labelPadding);
+            } else {
+                currentLabelPosition = item.getBarEndBounds() + dpToPx(labelPadding);
+            }
+        }
+
+        float barLength = getWidth() - getPaddingRight() - getPaddingLeft();
+        float left = getPaddingLeft();
+        float right = left + barLength;
+
+        if (currentLabelPosition > right) {
+            // Labels exceed the bar graph bounds
+            positionLabelsFromLeftToRight = false;
+        } else {
+            // Labels do not exceed the bar graph bounds
+            positionLabelsFromLeftToRight = true;
+        }
     }
 
     private void drawLabels(Canvas canvas) {
@@ -461,6 +487,7 @@ public class CustomBarGraph extends View {
         String secondaryLabel;
 
         int size;
+        int i;
         float barCenter = getBarCenter();
         float halfBarHeight = barHeight / 2;
 
@@ -480,28 +507,61 @@ public class CustomBarGraph extends View {
 
         size = readyLabelMeta.size();
 
-        for (int i = 0; i < size; i++) {
+        if (positionLabelsFromLeftToRight) {
 
-            item = readyLabelMeta.get(i);
-            primaryLabel = readyPrimaryLabels.get(i);
-            secondaryLabel = readySecondaryLabels.get(i);
+            for (i = 0; i < size; i++) {
 
-            if (i == 0) {
-                currentLabelPosition = item.getBarStartBounds();
+                item = readyLabelMeta.get(i);
+                primaryLabel = readyPrimaryLabels.get(i);
+                secondaryLabel = readySecondaryLabels.get(i);
+
+                if (i == 0) {
+                    currentLabelPosition = item.getBarStartBounds();
+                }
+
+                primaryFillRect = new Rect();
+                primaryLabelPaint.getTextBounds(primaryLabel, 0, primaryLabel.length(), primaryFillRect);
+                canvas.drawText(primaryLabel, currentLabelPosition, primaryTop, primaryLabelPaint);
+
+                secondaryFillRect = new Rect();
+                secondaryLabelPaint.getTextBounds(secondaryLabel, 0, secondaryLabel.length(), secondaryFillRect);
+                canvas.drawText(secondaryLabel, currentLabelPosition, secondaryTop, secondaryLabelPaint);
+
+                if (currentLabelPosition + item.getLongestLabelWidth() > item.getBarEndBounds()) {
+                    currentLabelPosition = currentLabelPosition + item.getLongestLabelWidth() + dpToPx(labelPadding);
+                } else {
+                    currentLabelPosition = item.getBarEndBounds() + dpToPx(labelPadding);
+                }
             }
 
-            primaryFillRect = new Rect();
-            primaryLabelPaint.getTextBounds(primaryLabel, 0, primaryLabel.length(), primaryFillRect);
-            canvas.drawText(primaryLabel, currentLabelPosition, primaryTop, primaryLabelPaint);
+        } else {
 
-            secondaryFillRect = new Rect();
-            secondaryLabelPaint.getTextBounds(secondaryLabel, 0, secondaryLabel.length(), secondaryFillRect);
-            canvas.drawText(secondaryLabel, currentLabelPosition, secondaryTop, secondaryLabelPaint);
+            for (i = size - 1; i >= 0; i--) {
 
-            if (currentLabelPosition + item.getLongestLabelWidth() > item.getBarEndBounds()) {
-                currentLabelPosition = currentLabelPosition + item.getLongestLabelWidth() + dpToPx(labelPadding);
-            } else {
-                currentLabelPosition = item.getBarEndBounds() + dpToPx(labelPadding);
+                item = readyLabelMeta.get(i);
+                primaryLabel = readyPrimaryLabels.get(i);
+                secondaryLabel = readySecondaryLabels.get(i);
+
+                primaryFillRect = new Rect();
+                primaryLabelPaint.getTextBounds(primaryLabel, 0, primaryLabel.length(), primaryFillRect);
+
+                secondaryFillRect = new Rect();
+                secondaryLabelPaint.getTextBounds(secondaryLabel, 0, secondaryLabel.length(), secondaryFillRect);
+
+                if (i == size - 1) {
+                    currentLabelPosition = item.getBarEndBounds() - item.getLongestLabelWidth();
+                } else if (i == 0) {
+                    currentLabelPosition = item.getBarStartBounds();
+                } else {
+                    if (currentLabelPosition < item.getBarStartBounds()) {
+                        currentLabelPosition = currentLabelPosition - item.getLongestLabelWidth() - dpToPx(labelPadding);
+                    } else {
+                        currentLabelPosition = item.getBarStartBounds() - dpToPx(labelPadding);
+                    }
+                }
+
+                canvas.drawText(primaryLabel, currentLabelPosition, primaryTop, primaryLabelPaint);
+                canvas.drawText(secondaryLabel, currentLabelPosition, secondaryTop, secondaryLabelPaint);
             }
         }
     }
