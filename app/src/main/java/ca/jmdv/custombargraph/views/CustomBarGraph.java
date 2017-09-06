@@ -459,7 +459,7 @@ public class CustomBarGraph extends View {
             if (currentLabelPosition + item.getLongestLabelWidth() > item.getBarEndBounds()) {
                 currentLabelPosition = currentLabelPosition + item.getLongestLabelWidth() + dpToPx(labelPadding);
             } else {
-                currentLabelPosition = item.getBarEndBounds() + dpToPx(labelPadding);
+                currentLabelPosition = item.getBarEndBounds();
             }
         }
 
