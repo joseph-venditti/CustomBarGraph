@@ -116,7 +116,7 @@ public class CustomBarGraph extends View {
                 paint = new Paint(Paint.ANTI_ALIAS_FLAG);
                 paint.setColor(item.getColor());
                 readyColors.add(paint);
-                readyValues.add(setValue(item.getValue()));
+                readyValues.add(setValue(item.getValue().floatValue()));
                 readyPrimaryLabels.add((!TextUtils.isEmpty(item.getPrimaryLabel())) ? item.getPrimaryLabel() : "");
                 readySecondaryLabels.add((!TextUtils.isEmpty(item.getSecondaryLabel())) ? item.getSecondaryLabel() : "");
             }
@@ -436,7 +436,7 @@ public class CustomBarGraph extends View {
             fillRect = new Rect();
             valueF = (i * (maxValue / (lineCount - 1)));
             valueF = BigDecimal.valueOf(valueF)
-                    .setScale(3, RoundingMode.HALF_UP)
+                    .setScale(3, RoundingMode.FLOOR)
                     .floatValue();
             label = valueF + PERCENTAGE_SYMBOL;
             scaleLinePercentagePaint.getTextBounds(label, 0, label.length(), fillRect);
@@ -467,7 +467,7 @@ public class CustomBarGraph extends View {
         float left = getPaddingLeft();
         float right = left + barLength;
 
-        if (currentLabelPosition > right) {
+        if (Math.floor(currentLabelPosition) > Math.floor(right)) {
             // Labels exceed the bar graph bounds
             positionLabelsFromLeftToRight = false;
         } else {

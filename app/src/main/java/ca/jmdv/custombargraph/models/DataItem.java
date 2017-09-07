@@ -9,11 +9,11 @@ import android.support.annotation.ColorInt;
 public class DataItem {
 
     private int color;
-    private float value;
+    private Double value;
     private String primaryLabel;
     private String secondaryLabel;
 
-    public DataItem(@ColorInt int color, float value, String primaryLabel, String secondaryLabel) {
+    public DataItem(@ColorInt int color, Double value, String primaryLabel, String secondaryLabel) {
         super();
         this.color = color;
         this.value = value;
@@ -29,11 +29,11 @@ public class DataItem {
         this.color = color;
     }
 
-    public float getValue() {
+    public Double getValue() {
         return value;
     }
 
-    public void setValue(float value) {
+    public void setValue(Double value) {
         this.value = value;
     }
 

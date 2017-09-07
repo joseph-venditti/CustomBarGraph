@@ -22,11 +22,11 @@ public class MainActivity extends AppCompatActivity {
         // SAMPLE 1
 
         // Create color/value pairs
-        DataItem pair0 = new DataItem(ContextCompat.getColor(this, R.color.colorOrange_800), 1.0f, null, null);
-        DataItem pair1 = new DataItem(ContextCompat.getColor(this, R.color.colorBlue_200), 0.1f, null, null);
-        DataItem pair2 = new DataItem(ContextCompat.getColor(this, R.color.colorBlue_300), 0.05f, null, null);
-        DataItem pair3 = new DataItem(ContextCompat.getColor(this, R.color.colorBlue_400), 1.0f, null, null);
-        DataItem pair4 = new DataItem(ContextCompat.getColor(this, R.color.colorGreen_200), 1.1f, null, null);
+        DataItem pair0 = new DataItem(ContextCompat.getColor(this, R.color.colorOrange_800), 1.0, null, null);
+        DataItem pair1 = new DataItem(ContextCompat.getColor(this, R.color.colorBlue_200), 0.1, null, null);
+        DataItem pair2 = new DataItem(ContextCompat.getColor(this, R.color.colorBlue_300), 0.05, null, null);
+        DataItem pair3 = new DataItem(ContextCompat.getColor(this, R.color.colorBlue_400), 1.0, null, null);
+        DataItem pair4 = new DataItem(ContextCompat.getColor(this, R.color.colorGreen_200), 1.1, null, null);
 
         // Add pairs to array
         ArrayList<DataItem> values = new ArrayList<>();
@@ -45,11 +45,11 @@ public class MainActivity extends AppCompatActivity {
         // SAMPLE 2
 
         // Create color/value pairs
-        pair0 = new DataItem(ContextCompat.getColor(this, R.color.colorBlue_300), 0.5f, getString(R.string.primary_label_1), getString(R.string.secondary_full_label_1));
-        pair1 = new DataItem(ContextCompat.getColor(this, R.color.colorBlue_400), 0.5f, getString(R.string.primary_full_label_2), getString(R.string.secondary_label_2));
-        pair2 = new DataItem(ContextCompat.getColor(this, R.color.colorBlue_500), 0.5f, getString(R.string.primary_label_3), getString(R.string.secondary_label_3));
-        pair3 = new DataItem(ContextCompat.getColor(this, R.color.colorBlue_600), 6.0f, getString(R.string.primary_label_4), getString(R.string.secondary_label_4));
-        pair4 = new DataItem(ContextCompat.getColor(this, R.color.colorBlue_700), 0.5f, getString(R.string.primary_label_5), getString(R.string.secondary_label_5));
+        pair0 = new DataItem(ContextCompat.getColor(this, R.color.colorBlue_300), 0.5, getString(R.string.primary_label_1), getString(R.string.secondary_full_label_1));
+        pair1 = new DataItem(ContextCompat.getColor(this, R.color.colorBlue_400), 0.5, getString(R.string.primary_full_label_2), getString(R.string.secondary_label_2));
+        pair2 = new DataItem(ContextCompat.getColor(this, R.color.colorBlue_500), 0.5, getString(R.string.primary_label_3), getString(R.string.secondary_label_3));
+        pair3 = new DataItem(ContextCompat.getColor(this, R.color.colorBlue_600), 6.0, getString(R.string.primary_label_4), getString(R.string.secondary_label_4));
+        pair4 = new DataItem(ContextCompat.getColor(this, R.color.colorBlue_700), 0.5, getString(R.string.primary_label_5), getString(R.string.secondary_label_5));
 
         // Add pairs to array
         values = new ArrayList<>();
@@ -69,8 +69,8 @@ public class MainActivity extends AppCompatActivity {
         // SAMPLE 3
 
         // Create color/value pairs
-        pair0 = new DataItem(ContextCompat.getColor(this, R.color.colorPurple_400), 4.0f, getString(R.string.primary_full_label_1), "");
-        pair1 = new DataItem(ContextCompat.getColor(this, R.color.colorPurple_700), 11.0f, getString(R.string.primary_full_label_2), "");
+        pair0 = new DataItem(ContextCompat.getColor(this, R.color.colorPurple_400), 4.0, getString(R.string.primary_full_label_1), "");
+        pair1 = new DataItem(ContextCompat.getColor(this, R.color.colorPurple_700), 11.0, getString(R.string.primary_full_label_2), "");
 
         // Add pairs to array
         values = new ArrayList<>();
@@ -86,9 +86,9 @@ public class MainActivity extends AppCompatActivity {
         // SAMPLE 4
 
         // Create color/value pairs
-        pair0 = new DataItem(ContextCompat.getColor(this, R.color.colorGreen_600), 2.0f, getString(R.string.primary_label_1), getString(R.string.secondary_label_1));
-        pair1 = new DataItem(ContextCompat.getColor(this, R.color.colorGreen_700), 4.0f, getString(R.string.primary_label_2), getString(R.string.secondary_label_2));
-        pair2 = new DataItem(ContextCompat.getColor(this, R.color.colorGreen_800), 1.0f, getString(R.string.primary_label_3), getString(R.string.secondary_label_3));
+        pair0 = new DataItem(ContextCompat.getColor(this, R.color.colorGreen_600), 2.0, getString(R.string.primary_label_1), getString(R.string.secondary_label_1));
+        pair1 = new DataItem(ContextCompat.getColor(this, R.color.colorGreen_700), 4.0, getString(R.string.primary_label_2), getString(R.string.secondary_label_2));
+        pair2 = new DataItem(ContextCompat.getColor(this, R.color.colorGreen_800), 1.0, getString(R.string.primary_label_3), getString(R.string.secondary_label_3));
 
         // Add pairs to array
         values = new ArrayList<>();
@@ -105,9 +105,9 @@ public class MainActivity extends AppCompatActivity {
         // SAMPLE 5
 
         // Create color/value pairs
-        pair0 = new DataItem(ContextCompat.getColor(this, R.color.colorOrange_300), 2.0f, null, null);
-        pair1 = new DataItem(ContextCompat.getColor(this, R.color.colorOrange_400), 0.5f, null, null);
-        pair2 = new DataItem(ContextCompat.getColor(this, R.color.colorOrange_500), 2.0f, null, null);
+        pair0 = new DataItem(ContextCompat.getColor(this, R.color.colorOrange_300), 2.0, null, null);
+        pair1 = new DataItem(ContextCompat.getColor(this, R.color.colorOrange_400), 0.5, null, null);
+        pair2 = new DataItem(ContextCompat.getColor(this, R.color.colorOrange_500), 2.0, null, null);
 
         // Add pairs to array
         values = new ArrayList<>();
@@ -124,11 +124,11 @@ public class MainActivity extends AppCompatActivity {
         // SAMPLE 6
 
         // Create color/value pairs
-        pair0 = new DataItem(ContextCompat.getColor(this, R.color.colorBlue_300), 13.0f, getString(R.string.primary_label_1), getString(R.string.secondary_label_1));
-        pair1 = new DataItem(ContextCompat.getColor(this, R.color.colorBlue_400), 0.5f, getString(R.string.primary_label_2), getString(R.string.secondary_label_2));
-        pair2 = new DataItem(ContextCompat.getColor(this, R.color.colorBlue_500), 0.5f, getString(R.string.primary_full_label_3), getString(R.string.secondary_label_3));
-        pair3 = new DataItem(ContextCompat.getColor(this, R.color.colorBlue_600), 0.5f, getString(R.string.primary_label_4), getString(R.string.secondary_full_label_4));
-        pair4 = new DataItem(ContextCompat.getColor(this, R.color.colorBlue_700), 0.5f, getString(R.string.primary_label_5), getString(R.string.secondary_label_5));
+        pair0 = new DataItem(ContextCompat.getColor(this, R.color.colorBlue_300), 13.0, getString(R.string.primary_label_1), getString(R.string.secondary_label_1));
+        pair1 = new DataItem(ContextCompat.getColor(this, R.color.colorBlue_400), 0.5, getString(R.string.primary_label_2), getString(R.string.secondary_label_2));
+        pair2 = new DataItem(ContextCompat.getColor(this, R.color.colorBlue_500), 0.5, getString(R.string.primary_full_label_3), getString(R.string.secondary_label_3));
+        pair3 = new DataItem(ContextCompat.getColor(this, R.color.colorBlue_600), 0.5, getString(R.string.primary_label_4), getString(R.string.secondary_full_label_4));
+        pair4 = new DataItem(ContextCompat.getColor(this, R.color.colorBlue_700), 0.5, getString(R.string.primary_label_5), getString(R.string.secondary_label_5));
 
         // Add pairs to array
         values = new ArrayList<>();
